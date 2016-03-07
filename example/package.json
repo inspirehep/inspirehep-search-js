@@ -1,0 +1,21 @@
+{
+  "name": "inspirehep-search-js-demo",
+  "version": "0.0.1",
+  "description": "Inspirehep-Search-JS Demo",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": {
+    "name": "INSPIRE",
+    "email": "admin@inspirehep.net"
+  },
+  "license": "GPLv2",
+  "private": "true",
+  "dependencies": {
+    "angular": "^1.4.8",
+    "angular-sanitize": "~1.4.9",
+    "bootstrap": "^3.3.5",
+    "invenio-search-js": "^0.1.0"
+  }
+}

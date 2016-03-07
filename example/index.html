@@ -1,0 +1,110 @@
+<!-- Copyright (C) 2015, 2016 CERN.
+
+  Invenio is free software; you can redistribute it
+  and/or modify it under the terms of the GNU General Public License as
+  published by the Free Software Foundation; either version 2 of the
+  License, or (at your option) any later version.
+
+  Invenio is distributed in the hope that it will be
+  useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with Invenio; if not, write to the
+  Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+  MA 02111-1307, USA.
+
+  In applying this license, CERN does not
+  waive the privileges and immunities granted to it by virtue of its status
+  as an Intergovernmental Organization or submit itself to any jurisdiction.
+-->
+<html>
+  <head>
+    <script src="./node_modules/angular/angular.js"></script>
+    <script src="./node_modules/angular-sanitize/angular-sanitize.js"></script>
+    <script src="./node_modules/invenio-search-js/dist/invenio-search-js.js"></script>
+    <script src="/src/inspirehep-search-js/inspirehepSearch.module.js"></script>
+    <script src="/src/inspirehep-search-js/filters/doi.js"></script>
+    <script src="/src/inspirehep-search-js/filters/inspirehepSearch.filters.module.js"></script>
+    <link href="./node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
+    <style>
+      body {
+        padding-top: 70px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="jumbotron">
+            <h1>Inspire Search Demo</h1>
+          </div>
+          <div ng-app="inspirehepSearch">
+            <invenio-search search-endpoint="http://localhost:5000/api/literature/">
+              <div class="row">
+                <div class="col-md-3">
+                  <invenio-search-facets
+                   template="/src/inspirehep-search-js/templates/facets.html"
+                  ></invenio-search-facets>
+                </div> <!-- /.col-md-3 -->
+                <div class="col-md-9">
+                  <!-- SEARCHBAR -->
+                  <invenio-search-bar
+                   template="/src/inspirehep-search-js/templates/searchBar.html"
+                   placeholder="Start typing">
+                  </invenio-search-bar>
+                  <div class="text-right">
+                    <!-- SORT ORDER -->
+                    <invenio-search-sort-order
+                     label="Z->A"
+                     sort-key="sort"
+                     template="/src/inspirehep-search-js/templates/toggleButton.html"
+                    >
+                    </invenio-search-sort-order>
+                    <!-- SORT -->
+                    <invenio-search-select-box
+                     sort-key="sort"
+                     default-option="bestmatch"
+                     available-options='{"options": [{"title": "Best match", "value": "bestmatch"}, {"title": "Control number", "value": "-controlnumber"}]}'
+                     template="/src/inspirehep-search-js/templates/selectBox.html"
+                    >
+                    </invenio-search-select-box>
+                  </div>
+                  <!-- ERROR -->
+                  <invenio-search-error
+                   template="/src/inspirehep-search-js/templates/error.html"
+                   message="Error.">
+                  </invenio-search-error>
+                  <!-- LOADING -->
+                  <invenio-search-loading
+                   template="/src/inspirehep-search-js/templates/loading.html"
+                   message="Loading...">
+                  </invenio-search-loading>
+                  <!-- COUNT -->
+                  <center>
+                    <invenio-search-count
+                    template="/src/inspirehep-search-js/templates/count.html">
+                    </invenio-search-count>
+                  </center>
+                  <!-- RESULTS -->
+                  <invenio-search-results
+                   template="/src/inspirehep-search-js/templates/literature/results.html">
+                  </invenio-search-results>
+                  <!-- PAGINATION -->
+                  <center>
+                    <invenio-search-pagination
+                     adjacent-size="4"
+                     template="/src/inspirehep-search-js/templates/pagination.html">
+                    </invenio-search-pagination>
+                  </center>
+                </div> <!-- /.col-md-12 -->
+              </div>
+            </invenio-search>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
