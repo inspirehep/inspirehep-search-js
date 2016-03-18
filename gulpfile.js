@@ -50,7 +50,8 @@ var sourceFiles = [
 ];
 
 var templates = [
-  path.join(sourceDirectory, '/inspirehep-search-js/templates/**/*.html')
+  path.join(sourceDirectory, '/inspirehep-search-js/templates/**/*.html'),
+  path.join(sourceDirectory, '/inspirehep-search-suggestions/templates/*.html')
 ];
 
 // Get licenses

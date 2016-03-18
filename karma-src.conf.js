@@ -53,6 +53,8 @@ module.exports = function(config) {
       'node_modules/angular-sanitize/angular-sanitize.js',
       'node_modules/angular-mocks/angular-mocks.js',
       'node_modules/invenio-search-js/dist/invenio-search-js.js',
+      'node_modules/angularjs-toaster/toaster.js',
+      'node_modules/angular-animate/angular-animate.js',
       'src/**/*.js',
       'src/**/*.html',
       'test/unit/**/*.js',

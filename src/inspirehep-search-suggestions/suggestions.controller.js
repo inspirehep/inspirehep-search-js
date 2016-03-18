@@ -21,34 +21,17 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
  */
 
-'use strict';
 
-describe('Unit: testing dependencies', function() {
+(function(angular) {
+  angular.module('inspirehepSearch.suggestions', ['toaster', 'ngAnimate']) //renive anim?
+    .controller('toastrController', function($scope, toaster) {
+      toaster.pop('warning', 'Warning:', $scope.vm.invenioSearchResults.suggestion_messages[0][1]);
 
-  var module;
-  var dependencies;
-  dependencies = [];
+      function clearToasts() {
+        toaster.clear();
+      }
 
-  var hasModule = function(module) {
-    return dependencies.indexOf(module) >= 0;
-  };
+      $scope.$on('invenio.search.success', clearToasts);
 
-  beforeEach(function() {
-    // Get module
-    module = angular.module('inspirehepSearch');
-    dependencies = module.requires;
-  });
-
-  it('should load filters module', function() {
-    expect(hasModule('inspirehepSearch.filters')).to.be.ok;
-  });
-
-  it('should load configuration module', function() {
-    expect(hasModule('inspirehepSearch.configuration')).to.be.ok;
-  });
-
-  it('should load suggestions module', function() {
-    expect(hasModule('inspirehepSearch.suggestions')).to.be.ok;
-  });
-
-});
+    });
+})(angular);

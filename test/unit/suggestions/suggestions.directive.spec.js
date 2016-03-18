@@ -23,32 +23,39 @@
 
 'use strict';
 
-describe('Unit: testing dependencies', function() {
+describe('Check suggestions directive', function() {
 
-  var module;
-  var dependencies;
-  dependencies = [];
+  var $compile;
+  var $rootScope;
+  var $httpBackend;
+  var scope;
+  var template;
 
-  var hasModule = function(module) {
-    return dependencies.indexOf(module) >= 0;
-  };
+  // Load the templates
+  beforeEach(angular.mock.module('templates'));
+  // Inject the angular module
+  beforeEach(angular.mock.module('inspirehepSearch.suggestions'));
 
-  beforeEach(function() {
-    // Get module
-    module = angular.module('inspirehepSearch');
-    dependencies = module.requires;
-  });
+  beforeEach(
+    inject(function(_$compile_, _$rootScope_, _$httpBackend_) {
 
-  it('should load filters module', function() {
-    expect(hasModule('inspirehepSearch.filters')).to.be.ok;
-  });
+      $compile = _$compile_;
+      $httpBackend = _$httpBackend_;
+      $rootScope = _$rootScope_;
 
-  it('should load configuration module', function() {
-    expect(hasModule('inspirehepSearch.configuration')).to.be.ok;
-  });
+      scope = $rootScope;
 
-  it('should load suggestions module', function() {
-    expect(hasModule('inspirehepSearch.suggestions')).to.be.ok;
+      template = '<inspire-search-suggestions template = "src/inspirehep-search-suggestions/templates/suggestions.html"></inspire-search-suggestions>';
+
+      template = $compile(template)(scope);
+
+      // Digest
+      scope.$digest();
+    }));
+
+  it('Test if the template is loaded', function() {
+    // Check that the compiled element contains the templated content
+    expect(template.html()).to.contain('id="toast-container"');
   });
 
 });
