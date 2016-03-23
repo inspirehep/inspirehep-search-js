@@ -70,7 +70,7 @@
     'inspirehepFacetsShowMore',
     'inspirehepSearch.filters',
     'inspirehepSearch.configuration',
+    'inspirehepSearch.suggestions',
   ]);
-
 
 })(angular);
