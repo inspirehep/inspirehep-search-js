@@ -1,3 +1,4 @@
+<div ng-controller="checkboxCtrl">
 <div class="row" ng-repeat="record in vm.invenioSearchResults.hits.hits track by record.metadata.control_number">
   <div class="col-md-12">
     <div id="panel-default-brief" class="panel panel-default" >
@@ -7,7 +8,7 @@
             <div class="row">
               <div class="col-md-1">
                 <span id='checkbox-parent'>
-                  <input type="checkbox" class="checkbox-results" id="{{record.id}}">
+                  <input type="checkbox" class="checkbox-results" ng-click="loadIdsToExport(record.id)" ng-checked="isChecked(record.id)" />
                 </span>
               </div>
               <div class="col-md-11">
@@ -73,4 +74,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>
