@@ -21,46 +21,14 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
  */
 
-(function(angular) {
-
-  function authorsAffiliation() {
-
-    function link(scope, element, attrs, vm) {
-
-      if (attrs.authors !== '') {
-        vm.authors = JSON.parse(attrs.authors);
+(function (angular) {
+  angular.module('inspirehepSearch.suggestions', [])
+    .controller('toastrController', function ($scope) {
+      for (var i = 0; i < $scope.vm.invenioSearchResults.warnings.length; i++) {
+        if ($scope.vm.invenioSearchResults.warnings[i].hasOwnProperty('query_suggestion')) {
+          $scope.suggestion_message = $scope.vm.invenioSearchResults.warnings[i].query_suggestion;
+          break;
+        }
       }
-
-      if (attrs.collaboration !== '') {
-        vm.collaboration = JSON.parse(attrs.collaboration);
-      }
-
-      vm.numberOfAuthors = parseInt(attrs.numberOfAuthors);
-
-      vm.controlNumber = parseInt(attrs.controlNumber);
-
-      vm.AUTHORS_LIMIT = 10;
-
-      vm.authorsInfo = vm.getAuthors();
-
-    }
-
-    function templateUrl(element, attrs) {
-      return attrs.authorsTemplate;
-    }
-
-    return {
-        templateUrl: templateUrl,
-        restrict: 'E',
-        controller: 'authorCtrl',
-        controllerAs: 'vm',
-        scope: true,
-        link: link
-      };
-  }
-
-
-  angular.module('authors.directives', [])
-    .directive('authorsAffiliation', authorsAffiliation);
-
+    });
 })(angular);

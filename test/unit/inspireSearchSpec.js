@@ -50,4 +50,8 @@ describe('Unit: testing dependencies', function() {
   it('should load angular-ui module', function() {
     expect(hasModule('ui.bootstrap')).to.be.ok;
   });
+
+  it('should load suggestions module', function() {
+    expect(hasModule('inspirehepSearch.suggestions')).to.be.ok;
+  });
 });

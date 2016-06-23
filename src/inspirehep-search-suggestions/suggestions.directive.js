@@ -23,44 +23,19 @@
 
 (function(angular) {
 
-  function authorsAffiliation() {
-
-    function link(scope, element, attrs, vm) {
-
-      if (attrs.authors !== '') {
-        vm.authors = JSON.parse(attrs.authors);
-      }
-
-      if (attrs.collaboration !== '') {
-        vm.collaboration = JSON.parse(attrs.collaboration);
-      }
-
-      vm.numberOfAuthors = parseInt(attrs.numberOfAuthors);
-
-      vm.controlNumber = parseInt(attrs.controlNumber);
-
-      vm.AUTHORS_LIMIT = 10;
-
-      vm.authorsInfo = vm.getAuthors();
-
-    }
+  function inspireSearchSuggestions() {
 
     function templateUrl(element, attrs) {
-      return attrs.authorsTemplate;
+      return attrs.template;
     }
-
     return {
-        templateUrl: templateUrl,
-        restrict: 'E',
-        controller: 'authorCtrl',
-        controllerAs: 'vm',
-        scope: true,
-        link: link
-      };
+      restrict: 'E',
+      scope: false,
+      templateUrl: templateUrl,
+    };
   }
 
-
-  angular.module('authors.directives', [])
-    .directive('authorsAffiliation', authorsAffiliation);
+  angular.module('inspirehepSearch.suggestions')
+    .directive('inspireSearchSuggestions', inspireSearchSuggestions);
 
 })(angular);

@@ -64,51 +64,51 @@ describe('Controller: FacetsShowMoreController', function () {
           "author": {
             "buckets": [
               {
-                "doc_count": 47, 
+                "doc_count": 47,
                 "key": "Bocci, Andrea"
-              }, 
+              },
               {
-                "doc_count": 40, 
+                "doc_count": 40,
                 "key": "Meier, Frank"
               },
               {
-                "doc_count": 47, 
+                "doc_count": 47,
                 "key": "Bocci, Andrea"
-              }, 
+              },
               {
-                "doc_count": 40, 
+                "doc_count": 40,
                 "key": "Meier, Frank"
               },
               {
-                "doc_count": 47, 
+                "doc_count": 47,
                 "key": "Bocci, Andrea"
-              }, 
+              },
               {
-                "doc_count": 40, 
+                "doc_count": 40,
                 "key": "Meier, Frank"
               },
               {
-                "doc_count": 47, 
+                "doc_count": 47,
                 "key": "Bocci, Andrea"
-              }, 
+              },
               {
-                "doc_count": 40, 
+                "doc_count": 40,
                 "key": "Meier, Frank"
               },
               {
-                "doc_count": 47, 
+                "doc_count": 47,
                 "key": "Bocci, Andrea"
-              }, 
+              },
               {
-                "doc_count": 40, 
+                "doc_count": 40,
                 "key": "Meier, Frank"
               },
               {
-                "doc_count": 47, 
+                "doc_count": 47,
                 "key": "Bocci, Andrea"
-              }, 
+              },
               {
-                "doc_count": 40, 
+                "doc_count": 40,
                 "key": "Meier, Frank"
               }
             ]

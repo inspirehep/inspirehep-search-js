@@ -70,7 +70,7 @@
   // Setup configuration
   angular.module('inspirehepSearch.configuration', [])
       .config(inspireSearchConfiguration);
-    
+
     // Setup everything
   angular.module('inspirehepSearch', [
     'invenioSearch',
@@ -78,10 +78,12 @@
     'inspirehepSearch.filters',
     'inspirehepSearch.configuration',
     'ui.bootstrap',
-    'authors'
+    'authors',
+    'inspirehepSearch.suggestions'
   ]);
 
 })(angular);
+
 (function(angular) {
 
   angular.module('authors', [
@@ -200,6 +202,83 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
  */
 
+(function (angular) {
+  angular.module('inspirehepSearch.suggestions', [])
+    .controller('toastrController', function ($scope) {
+      for (var i = 0; i < $scope.vm.invenioSearchResults.warnings.length; i++) {
+        if ($scope.vm.invenioSearchResults.warnings[i].hasOwnProperty('query_suggestion')) {
+          $scope.suggestion_message = $scope.vm.invenioSearchResults.warnings[i].query_suggestion;
+          break;
+        }
+      }
+    });
+})(angular);
+
+/*
+ * This file is part of INSPIRE.
+ * Copyright (C) 2016 CERN.
+ *
+ * INSPIRE is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * INSPIRE is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with INSPIRE; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+ *
+ * In applying this license, CERN does not
+ * waive the privileges and immunities granted to it by virtue of its status
+ * as an Intergovernmental Organization or submit itself to any jurisdiction.
+ */
+
+(function(angular) {
+
+  function inspireSearchSuggestions() {
+
+    function templateUrl(element, attrs) {
+      return attrs.template;
+    }
+    return {
+      restrict: 'E',
+      scope: false,
+      templateUrl: templateUrl,
+    };
+  }
+
+  angular.module('inspirehepSearch.suggestions')
+    .directive('inspireSearchSuggestions', inspireSearchSuggestions);
+
+})(angular);
+
+/*
+ * This file is part of INSPIRE.
+ * Copyright (C) 2016 CERN.
+ *
+ * INSPIRE is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * INSPIRE is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with INSPIRE; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+ *
+ * In applying this license, CERN does not
+ * waive the privileges and immunities granted to it by virtue of its status
+ * as an Intergovernmental Organization or submit itself to any jurisdiction.
+ */
+
 (function(angular) {
 
   function authorCtrl($scope) {
@@ -267,7 +346,7 @@
  * waive the privileges and immunities granted to it by virtue of its status
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
  */
- 
+
 (function(angular) {
 
   function authorsAffiliation() {
@@ -275,11 +354,11 @@
     function link(scope, element, attrs, vm) {
 
       if (attrs.authors !== '') {
-        vm.authors = JSON.parse(attrs.authors);          
+        vm.authors = JSON.parse(attrs.authors);
       }
 
       if (attrs.collaboration !== '') {
-        vm.collaboration = JSON.parse(attrs.collaboration);  
+        vm.collaboration = JSON.parse(attrs.collaboration);
       }
 
       vm.numberOfAuthors = parseInt(attrs.numberOfAuthors);
@@ -289,7 +368,7 @@
       vm.AUTHORS_LIMIT = 10;
 
       vm.authorsInfo = vm.getAuthors();
-   
+
     }
 
     function templateUrl(element, attrs) {
@@ -482,6 +561,10 @@
 
   function authorInstitutionFilter() {
     return function(input) {
+      if ( input === undefined ) {
+        return;
+      }
+
       var first_institution  = '';
       for ( var i=0; i<input.length; i++ ) {
         if ( typeof input[i].institution !== 'undefined' && typeof input[i].institution.name !== 'undefined') {
@@ -492,10 +575,9 @@
             first_institution = input[i].institution.name;
           }
         }
-
-        if ( first_institution ) {
+      }
+      if ( first_institution ) {
           return '(' + first_institution + ')';
-        }
       }
     };
   }
