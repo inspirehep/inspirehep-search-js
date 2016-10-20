@@ -29,7 +29,8 @@
     'inspirehepFacetsShowMore',
     'inspirehepSearch.filters',
     'ui.bootstrap',
-    'authors'
+    'authors',
+    'claimMode'
   ]);
 
 })(angular);

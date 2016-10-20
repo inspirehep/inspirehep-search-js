@@ -1,3 +1,21 @@
+<div ng-controller="claimCtrl">
+  <div  ng-if="user_is_logged">
+    <h4>Claim Mode</h4>
+    <div class="facet-container">
+          <div class="onoffswitch col-centered">
+            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch"
+                  ng-model="vm.SwitchColor"
+                  ng-change="toggleClaim()"
+                  >
+            <label class="onoffswitch-label" for="myonoffswitch{{$index}}">
+              <span class="onoffswitch-inner"></span>
+              <span class="onoffswitch-switch"></span>
+            </label>
+          </div>
+    </div>
+    <hr>
+  </div>
+</div>
 <div ng-init="order={'doc_type': 'Document type', 'subject': 'Subject', 'author': 'Author', 'experiment': 'Experiment', 'earliest_date': 'Year'}">
   <div ng-if="vm.invenioSearchResults.aggregations[key].buckets.length" ng-repeat="(key, title) in order">
     <h4>Filter by {{ title }}</h4>
