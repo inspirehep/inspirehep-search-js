@@ -7,7 +7,7 @@
           <a ng-href="/literature/{{record.id}}" ng-bind-html='record.metadata.titles[0] | title'>
           </a>
         </h2>
-        <input type="checkbox" class="checkbox-results" ng-click="toggleId(record.id)" ng-checked="isChecked(record.id)" />
+        <input type="checkbox" class="checkbox-results" ng-disabled="vm.ClaimToggled && vm.alreadyClaimed(record.id)" ng-model="vm.claimSelected[record.id]" ng-click="toggleId(record.id)" ng-checked="isChecked(record.id)" />
         <div class="record-brief-subtitle">
           <span ng-bind-html='record.metadata.collaboration | collaboration : record.metadata.corporate_author'></span>
             <span ng-bind-html='record.metadata.authors | corporateAuthor : record.metadata.corporate_author'></span>
@@ -40,7 +40,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-3 right-column">
+      <div ng-if="!vm.ClaimToggled" class="col-md-3 right-column">
         <a ng-if="record.metadata.arxiv_eprints|arxiv" type="button" class="btn custom-btn btn-warning link-to-pdf no-external-icon" href="http://arxiv.org/pdf/{{ record.metadata.arxiv_eprints | arxiv }}" >PDF</a>
         <inspire-export-modal button-template="/static/node_modules/inspirehep-js/dist/templates/export/templates/button_single.html" body-template="/static/node_modules/inspirehep-js/dist/templates/export/templates/modalbody.html" recid={{record.id}}>
         </inspire-export-modal>
@@ -52,6 +52,11 @@
             <i class="fa fa-link"></i><a href="/record/{{record.id}}#references" target="_blank">  {{record.display.number_of_references}} References</a>
           </span>
         </div>
+      </div>
+      <div ng-if="vm.ClaimToggled" class="col-md-3 right-column">
+        <button ng-if="!vm.alreadyClaimed(record.id) && vm.isClaimable(record.id)" type="button" ng-click="vm.claimRecord(record.id)" class="btn btn-success btn-claim">Claim this record</button>
+        <button ng-if="!vm.alreadyClaimed(record.id) && !vm.isClaimable(record.id)" type="button" ng-click="vm.claimRecord(record.id)" class="btn btn-warning btn-claim">Request claim</button>
+        <button ng-if="vm.alreadyClaimed(record.id)" ng-disabled="true" type="button" ng-click="vm.claimRecord(record.id)" class="btn btn-primary btn-claim">Already Claimed</button>
       </div>
     </div>
   </div>
