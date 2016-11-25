@@ -1,9 +1,0 @@
-<span ng-if="!vm.collaboration.length>0" ng-repeat="author in vm.authorsInfo">
-  <a  href="http://inspirehep.net/author/profile/{{author.full_name}}?recid={{vm.controlNumber}}" uib-tooltip="{{author.affiliation}}"  tooltip-placement="bottom" class="no-external-icon">{{vm.splitAuthorName(author.full_name)}}</a>
-  <span ng-if="!$last"> ; </span>
-  <i ng-if="vm.numberOfAuthors > vm.AUTHORS_LIMIT && $last">et al.</i> 
-</span>
-<span ng-if="vm.collaboration.length>0 && vm.numberOfAuthors > vm.AUTHORS_LIMIT">
-  (<a  href="http://inspirehep.net/author/profile/{{vm.authorsInfo[0].full_name}}?recid={{vm.controlNumber}}" uib-tooltip="{{vm.authorsInfo[0].affiliation}}"  tooltip-placement="bottom" class="no-external-icon">{{vm.splitAuthorName(vm.authorsInfo[0].full_name)}}</a>
-  <i>et al.</i>) 
-</span>
