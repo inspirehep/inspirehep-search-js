@@ -4,24 +4,23 @@
       <div class="col-md-12">
         <h2 class="record-brief-title">
           <a class="title" ng-href="/journals/{{ record.id }}">
-            {{ record.metadata.titles[0].title }}
-          </a>
-      </h2>
+            {{ record.metadata.journal_title.title }} </a>
+        </h2>
 
-      <div class="record-brief-subtitle">
-        <span ng-if="record.metadata.short_titles"
-            ng-bind="record.metadata.short_titles[0].title">
-        </span>
-      </div>
+        <div class="record-brief-subtitle">
+          <span ng-if="record.metadata.short_title"
+            ng-bind="record.metadata.short_title">
+          </span>
+        </div>
 
-      <div class="record-brief-details">
-        <div ng-if="record.metadata.urls[0]" class="record-brief-url">
-            <a ng-href="{{ record.metadata.urls[0].value }}">{{ record.metadata.urls[0].value }}</a>
+        <div class="record-brief-details">
+          <div ng-if="record.metadata.urls[0]" class="record-brief-url">
+              <a ng-href="{{ record.metadata.urls[0].value }}">{{ record.metadata.urls[0].value }}</a>
+          </div>
+          <div ng-if="record.metadata.publisher">
+            From <strong>{{ record.metadata.publisher[0] }}</strong>
+          </div>
         </div>
-        <div ng-if="record.metadata.publisher">
-          From <strong>{{ record.metadata.publisher[0] }}</strong>
-        </div>
-      </div>
     </div>
   </div>
 </div>

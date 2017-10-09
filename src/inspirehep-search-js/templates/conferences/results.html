@@ -4,27 +4,26 @@
       <div class="col-md-12">
         <h2 class="record-brief-title">
           <a ng-href="/conferences/{{ record.id }}">
-            {{ record.titles[0].title }}
-            <span ng-if="record.acronym[0]">
-              ({{ record.acronym[0] }})
+            {{ record.metadata.titles[0].title }}
+            <span ng-if="record.metadata.acronyms[0]">
+              ({{ record.metadata.acronyms[0] }})
             </span>
           </a>
         </h2>
         <div class="record-brief-subtitle">
-          <span class="conf-place" ng-if="record.address[0].original_address">
+          <span class="conf-place" ng-if="record.metadata.address[0].postal_address">
             <i class="fa fa-map-marker"></i>
-            <span class="conf-date" ng-if="record.date">
-              {{ record.metadata.date }}.
+            <span class="conf-date" ng-if="record.metadata.earliest_date">
+              {{ record.metadata.earliest_date }}.
             </span>
-            {{ record.metadata.address[0].original_address }}
+            {{ record.metadata.address[0].postal_address[0] }}
           </span>
         </div>
 
         <div class="record-brief-details">
-
-          <div ng-if="record.metadata.field_code">
+          <div ng-if="record.metadata.inspire_categories">
             <ul class="research-area">
-              <li ng-repeat="record in record.metadata.field_categories">
+              <li ng-repeat="record in record.metadata.inspire_categories">
                 {{ record.term }}
               </li>
             </ul>
@@ -33,7 +32,7 @@
           <div class="series" ng-if="record.metadata.series">
             Part of the
             <a href="/search?q=&cc=conferences&series={{ record.metadata.series[0] }}">
-              {{ record.metadata.series[0] }}
+              {{ record.metadata.series[0].name }}
             </a> series.
 
             <a ng-if="record.metadata.urls[0]" ng-href="{{record.metadata.urls[0]['value']}}">
