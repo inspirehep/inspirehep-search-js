@@ -31,6 +31,7 @@
     $scope.allChecked = allChecked;
     $scope.setDecision = setDecision;
     $scope.redirect = redirect;
+    $scope.hasConflicts = hasConflicts;
     function _add_record_method(record) {
       var method = record._source.metadata.acquisition_source.method;
       if (method in $scope.vm.selected_record_methods) {
@@ -75,6 +76,9 @@
     }
     function setDecision(id, decision) {
       HoldingPenRecordService.setBatchDecision($scope.vm.invenioSearchResults.hits.hits, [+id], decision);
+    }
+    function hasConflicts(record) {
+      return record._source._extra_data.conflicts !== undefined && record._source._extra_data.conflicts.length > 0;
     }
     function toggleAll() {
       var remove_all = allChecked();

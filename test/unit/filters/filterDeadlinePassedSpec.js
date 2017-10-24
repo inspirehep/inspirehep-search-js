@@ -35,11 +35,13 @@ describe('Test Deadline Passed filter', function () {
 
             someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
 
-            var dd = ("0" + (someDate.getDate() + 1)).slice(-2),
+            var dd = someDate.getDate() === 26 ?
+                    ("0" + someDate.getDate() + 1).slice(-2) : 
+                    ("0" + someDate.getDate()).slice(-2),
                 mm = ("0" + (someDate.getMonth() + 1)).slice(-2),
                 y = someDate.getFullYear();
             var date = y + '-' + mm + '-' + dd;
-            console.log(date)
+            console.log(date);
             expect(datePassedNowFilter(date)).to.be.equal(true);
         })
     );
