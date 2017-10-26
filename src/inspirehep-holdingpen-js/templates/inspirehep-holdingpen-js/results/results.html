@@ -120,7 +120,7 @@
               </div>
             </div>
 
-            <div ng-if="record._source._extra_data.record_matches.length > 1 
+            <div ng-if="record._source._extra_data.record_matches.length > 1 && record._source._workflow.status === 'HALTED' 
             && record._source._workflow.data_type === 'hep' ">
                     <div ng-if="record._source._extra_data.record_matches.length <= 5">
                         <p class="small-text">Showing possible matches</p>
