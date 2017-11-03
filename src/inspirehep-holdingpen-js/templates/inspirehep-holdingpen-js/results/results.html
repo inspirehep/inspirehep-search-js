@@ -79,7 +79,7 @@
           </ul>
         </div>
 
-        <div class="col-md-3 decision">
+        <div class="col-md-3">
 
           <!--HEP Decision-->
           <div
@@ -96,6 +96,50 @@
                 </span>
               </p>
             </div>
+
+            <div ng-if="record._source._extra_data.record_matches.length > 1 
+            && record._source._workflow.data_type === 'hep' " ng-init="showPossibleMatches = true">
+                <div ng-show="showPossibleMatches">
+                    <div ng-if="record._source._extra_data.record_matches.length <= 5">
+                        <p class="small-text">Showing possible matches</p>
+                    </div>
+                    <div ng-if="record._source._extra_data.record_matches.length > 5">
+                        <p class="small-text">Showing 5 out of {{ (record._source._extra_data.record_matches.length-1) }} possible matches</p>
+                    </div>
+                    <div class="matchingRecords" ng-repeat="match in record._source._extra_data.record_matches">
+                        <label>
+                          <input id="{{match}}" name="possible-matches" type="radio"> 
+                          <h4>Title of the paper</h4>
+                          <div class="authors">2 or less authors</div>
+                          <a class="custom-control-description" ng-click="redirect('/literature/' + match)">
+                              labs.inspirehep.net/literature/{{match}}
+                          </a>
+                        </label>
+                    </div>
+                    <button class="btn btn-primary"
+                      ng-click="setDecision(match,'accept')"> Best Match
+                    </button>
+                    <a ng-click="showPossibleMatches = false">
+                      No Match Found
+                    </a>
+                </div>
+                <div ng-show="!showPossibleMatches">
+                    <button class="btn btn-success"
+                            ng-click="setDecision(record._id,'accept_core')">Core
+                    </button>
+                    <button class="btn btn-warning"
+                            ng-click="setDecision(record._id,'accept')">Accept
+                    </button>
+                    <button ng-if="record._source.metadata.acquisition_source.method == 'hepcrawl'"
+                            class="btn btn-danger"
+                            ng-click="setDecision(record._id, 'reject')">Reject
+                    </button>
+                    <button ng-if="record._source.metadata.acquisition_source.method == 'submitter'"
+                            class="btn btn-danger"
+                            ng-click="redirect('/holdingpen/' + record._id)">Reject
+                    </button>
+                </div>
+             </div>
 
             <div
               ng-if="record._source._workflow.data_type === 'hep' && !record._source.wo.user_action && record._source._workflow.status === 'HALTED'">
