@@ -59,6 +59,7 @@ module.exports = function(config) {
       'node_modules/ngclipboard/src/ngclipboard.js',
       'node_modules/invenio-search-js/dist/invenio-search-js.js',
       'node_modules/angular-ui-bootstrap/**/**/*.html',
+      'node_modules/mathjax/MathJax.js',
       'src/**/*.js',
       'src/**/*.html',
       'test/unit/**/*.js',

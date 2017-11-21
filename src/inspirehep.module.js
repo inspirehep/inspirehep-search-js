@@ -29,6 +29,7 @@
     'inspirehepHoldingpen',
     'inspirehepFacetsShowMore',
     'inspirehepExport',
+    'inspirehepMathjax',
     'inspirehepSearch.filters',
     'inspirehepSearchTemplates',
     'ui.bootstrap',
