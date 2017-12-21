@@ -130,7 +130,10 @@
             },
 
             restartWorkflow: function (vm, workflowId) {
-              $http.post('/api/holdingpen/' + workflowId + '/action/restart').then(function (response) {
+              var _data = JSON.stringify({
+                  'cleanup': true,
+              });
+              $http.post('/api/holdingpen/' + workflowId + '/action/restart', _data).then(function (response) {
                 vm.workflow_flag = 'Workflow restarted';
               }).catch(function (value) {
                 vm.restarted = false;
