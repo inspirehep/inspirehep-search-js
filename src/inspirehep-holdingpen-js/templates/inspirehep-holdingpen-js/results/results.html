@@ -34,9 +34,6 @@
 
   <div class="row hp-item" ng-if="vm.invenioSearchResults.hits.total > 0"
        ng-repeat="record in vm.invenioSearchResults.hits.hits track by record._id">
-
-    <div class="col-md-12">
-      <div class="row">
         <div class="col-md-1">
             <span id='checkbox-parent'>
               <input type="checkbox" class="checkbox-results"
@@ -47,22 +44,22 @@
 
         <div class="col-md-4"
              ng-if="record._source._workflow.data_type !== 'authors'">
-          <holding-pen-template-handler
-            template="/static/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/results/results_details_hep.html">
-          </holding-pen-template-handler>
+                    <holding-pen-template-handler
+                      template="/static/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/results/results_details_hep.html">
+                    </holding-pen-template-handler>
         </div>
 
         <div class="col-md-4"
              ng-if="record._source._workflow.data_type === 'authors'">
-          <holding-pen-template-handler
-            template="/static/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/results/results_details_authors.html">
-          </holding-pen-template-handler>
+                  <holding-pen-template-handler
+                    template="/static/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/results/results_details_authors.html">
+                  </holding-pen-template-handler>
         </div>
 
         <div class="col-md-2 pad-top-10">
           <p class="workflow-type"
              ng-class="record._source._workflow.workflow_class">
-             {{record._source.metadata.acquisition_source.datetime| date : "dd/MM/yy HH:mm:ss"}}
+            {{record._source.metadata.acquisition_source.datetime| date : "dd/MM/yy HH:mm:ss"}}
           </p>
           <p class="workflow-type"
              ng-class="record._source._workflow.workflow_class"
@@ -79,7 +76,7 @@
           </ul>
         </div>
 
-        <div class="col-md-3 decision">
+        <div class="col-md-3">
 
           <!--HEP Decision-->
           <div
@@ -134,6 +131,28 @@
                 </button>
               </div>
             </div>
+
+            <div ng-if="record._source._extra_data.record_matches.length > 1 && record._source._workflow.status === 'HALTED' 
+            && record._source._workflow.data_type === 'hep' ">
+                    <div ng-if="record._source._extra_data.record_matches.length <= 5">
+                        <p class="small-text">Showing possible matches</p>
+                    </div>
+                    <div ng-if="record._source._extra_data.record_matches.length > 5">
+                        <p class="small-text">Showing 5 out of {{ (record._source._extra_data.record_matches.length-1) }} possible matches</p>
+                    </div>
+                    <div ng-repeat="match in record._source._extra_data.record_matches.slice(1,record_matches.length)">
+                        <label>
+                          <input id="{{match}}" name="possible-matches" type="radio">
+                          <span class="custom-control-indicator"></span>
+                          <a class="custom-control-description" ng-click="redirect('/literature/' + match)">
+                              labs.inspirehep.net/literature/{{match}}
+                          </a>
+                        </label>
+                    </div>
+                    <button class="btn btn-primary"
+                      ng-click="setDecision(match,'accept')"> Best Match
+                    </button>
+             </div>
 
             <br/>
             <div
@@ -199,10 +218,6 @@
             <p class="small-text">
               This workflow is waiting to be run.</p>
           </div>
-
-
         </div>
-      </div>
-    </div>
   </div>
 </div>
