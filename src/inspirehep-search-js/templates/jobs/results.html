@@ -53,7 +53,7 @@
   <div ng-if="record.display.admin_tools.length > 0" class="panel-footer">
     <div ng-repeat="tool in record.display.admin_tools">
       <span ng-switch="tool">
-        <a ng-switch-when="editor" href="/editor/jobs/{{record.id}}"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
+        <a ng-switch-when="editor" href="/editor/record/jobs/{{record.id}}"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
       </span>
     </div>
   </div>
