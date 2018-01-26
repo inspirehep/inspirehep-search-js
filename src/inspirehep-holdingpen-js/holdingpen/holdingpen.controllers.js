@@ -30,6 +30,7 @@
     $scope.isChecked = isChecked;
     $scope.allChecked = allChecked;
     $scope.setDecision = setDecision;
+    $scope.onBestMatchSelected = onBestMatchSelected;
     $scope.redirect = redirect;
     $scope.hasConflicts = hasConflicts;
     $scope.hasValidationErrors = hasValidationErrors;
@@ -78,6 +79,11 @@
     function setDecision(id, decision) {
       HoldingPenRecordService.setBatchDecision($scope.vm.invenioSearchResults.hits.hits, [+id], decision);
     }
+
+    function onBestMatchSelected(workflowId, match, showPossibleMatches) {
+      HoldingPenRecordService.onBestMatchSelected(workflowId, match, showPossibleMatches);       
+    }
+
     function hasConflicts(record) {
       var _extra_data =  record._source._extra_data;
       return _extra_data && _extra_data.conflicts !== undefined && _extra_data.conflicts.length > 0;

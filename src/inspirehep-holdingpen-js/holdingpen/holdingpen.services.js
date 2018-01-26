@@ -83,6 +83,16 @@
               });
             },
 
+            onBestMatchSelected: function(workflowId, match, showPossibleMatches) {
+              var data = JSON.stringify({
+                'match_recid': match, 
+              });
+              
+              $http.post('/api/holdingpen/' + workflowId + '/action/resolve', data).then(function (response) {
+                showPossibleMatches.push(1);
+              });
+            },
+
             setBatchDecision: function (records, selected_record_ids, decision) {
 
               for (var record_idx in selected_record_ids) {
