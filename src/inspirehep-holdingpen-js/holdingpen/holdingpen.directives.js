@@ -266,6 +266,10 @@
               });
           },
 
+          onBestMatchSelected: function(workflowId, match, showPossibleMatches){
+            HoldingPenRecordService.onBestMatchSelected(workflowId, match, showPossibleMatches);
+          }, 
+          
           redirect: function (url) {
             $window.location = url;
           },

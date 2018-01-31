@@ -97,9 +97,9 @@
               </p>
             </div>
             
-            <div ng-if="record._source._extra_data.matches.fuzzy && record._source._workflow.data_type === 'hep' && record._source._workflow.status === 'HALTED'"
-            class="matches-container" ng-init="showPossibleMatches = []">
-                <div ng-show="showPossibleMatches.length < 1">
+            <div ng-if="record._source._extra_data.matches.fuzzy && record._source._workflow.data_type === 'hep' && record._source._workflow.status === 'HALTED' && record._source._extra_data._action === 'match_approval'"
+            class="matches-container" ng-init="matchFound = []; noMatchFound = []">
+                <div ng-if="matchFound.length < 1 && noMatchFound.length < 1">
                     <p class="sub-heading">Possible Matches</p>
                       <div class="matchingRecords" ng-repeat="match in record._source._extra_data.matches.fuzzy">
                         <input id="{{match}}" ng-model="match" name="possible-matches" type="radio" value="{{match}}"> 
@@ -110,23 +110,25 @@
                           <i class="fa fa-external-link" aria-hidden="true"></i>
                         </a>
                         <div ng-if="$last">
-                          <input id="0" value="null" name="possible-matches" type="radio">
-                          <label for="0" >
+                          <button class="btn btn-primary best-match" type="submit"
+                            ng-click="onBestMatchSelected(record._id, match, matchFound)"> Best Match
+                          </button>
+                          <button class="btn btn-primary no-match" ng-click="onBestMatchSelected(record._id, null, noMatchFound)">
                             None of these
-                          </label><br>
-                          <button class="btn btn-primary" type="submit"
-                            ng-click="onBestMatchSelected(record._id, match, showPossibleMatches)"> Best Match
                           </button>
                         </div>
                       </div>
                  </div>
-                <div ng-show="showPossibleMatches.length >= 1">
-                  <p> <i class="fa fa-check" aria-hidden="true"></i> Record was matched</p>
+                <div ng-if="matchFound.length >= 1">
+                  <p><i class="fa fa-check" aria-hidden="true"></i> Record was matched</p>
+                </div>
+                <div ng-if="matchFound.length === 0 && noMatchFound.length === 0">
+                  <p class="red-color"><i class="fa fa-exclamation-triangle icon-large"></i> There was an error while submitting your choice to the server.</p>
                 </div>
              </div>
 
             <div
-              ng-if="record._source._workflow.data_type === 'hep' && !record._source.wo.user_action && record._source._workflow.status === 'HALTED' && !record._source._extra_data.matches.fuzzy">
+              ng-if="record._source._workflow.data_type === 'hep' && !record._source.wo.user_action && record._source._workflow.status === 'HALTED' && record._source._extra_data._action === 'hep_approval' && !record._source._extra_data.matches.fuzzy">
               <div ng-if="hasConflicts(record)">
                   <a class="btn btn-warning"
                     href="/editor/holdingpen/{{record._id}}">Resolve Conflicts
