@@ -267,7 +267,7 @@
           },
 
           onBestMatchSelected: function(workflowId, match, showPossibleMatches){
-            HoldingPenRecordService.onBestMatchSelected(workflowId, match, showPossibleMatches);
+            HoldingPenRecordService.onBestMatchSelected($scope.vm, workflowId, match, showPossibleMatches);
           }, 
           
           redirect: function (url) {

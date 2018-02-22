@@ -98,7 +98,7 @@
             </div>
             
             <div ng-if="record._source._extra_data.matches.fuzzy && record._source._workflow.data_type === 'hep' && record._source._workflow.status === 'HALTED' && record._source._extra_data._action === 'match_approval'"
-            class="matches-container" ng-init="matchFound = []; noMatchFound = []">
+            class="matches-container" ng-init="matchFound = []; noMatchFound = [];">
                 <div ng-if="matchFound.length < 1 && noMatchFound.length < 1">
                     <p class="sub-heading">Possible Matches</p>
                       <div class="matchingRecords" ng-repeat="match in record._source._extra_data.matches.fuzzy">
@@ -113,28 +113,27 @@
                           <button class="btn btn-primary best-match" type="submit"
                             ng-click="onBestMatchSelected(record._id, match, matchFound)"> Best Match
                           </button>
-                          <button class="btn btn-primary no-match" ng-click="onBestMatchSelected(record._id, null, noMatchFound)">
+                          <button cl ass="btn btn-primary no-match" ng-click="onBestMatchSelected(record._id, null, noMatchFound)">
                             None of these
                           </button>
                         </div>
                       </div>
                  </div>
-                <div ng-if="matchFound.length >= 1">
+                <div ng-if="matchFound.length > 0">
                   <p><i class="fa fa-check" aria-hidden="true"></i> Record was matched</p>
                 </div>
-                <div ng-if="matchFound.length === 0 && noMatchFound.length === 0">
-                  <p class="red-color"><i class="fa fa-exclamation-triangle icon-large"></i> There was an error while submitting your choice to the server.</p>
+                <div ng-if="noMatchFound.length > 0">
+                  <p>No matches</p>
                 </div>
              </div>
 
             <div
-              ng-if="record._source._workflow.data_type === 'hep' && !record._source.wo.user_action && record._source._workflow.status === 'HALTED' && record._source._extra_data._action === 'hep_approval' && !record._source._extra_data.matches.fuzzy">
+              ng-if="record._source._workflow.data_type === 'hep' && !record._source.wo.user_action && record._source._workflow.status === 'HALTED' && record._source._extra_data._action === 'hep_approval'">
               <div ng-if="hasConflicts(record)">
                   <a class="btn btn-warning"
                     href="/editor/holdingpen/{{record._id}}">Resolve Conflicts
                   </a>
               </div>
-
               <div ng-if="!hasConflicts(record)">
                 <button class="btn btn-success"
                         ng-click="setDecision(record._id,'accept_core')">Core
@@ -142,6 +141,7 @@
                 <button class="btn btn-warning"
                         ng-click="setDecision(record._id,'accept')">Accept
                 </button>
+
                 <button ng-if="record._source.metadata.acquisition_source.method == 'hepcrawl' && record._source._extra_data.journal_coverage == 'full'"
                         class="btn btn-danger-weak"
                         ng-click="redirect('/holdingpen/' + record._id)"

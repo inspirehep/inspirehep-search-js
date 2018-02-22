@@ -83,13 +83,15 @@
               });
             },
 
-            onBestMatchSelected: function(workflowId, match, showPossibleMatches) {
+            onBestMatchSelected: function(vm, workflowId, match, showPossibleMatches) {
               var data = JSON.stringify({
-                'match_recid': match, 
+                'match_recid': match 
               });
               
-              $http.post('/api/holdingpen/' + workflowId + '/action/resolve', data).then(function (response) {
+              $http.post('/api/holdingpen/' + workflowId + '/action/resolve', data).then(function() {
                 showPossibleMatches.push(1);
+              }).catch(function(value) {
+                vm.error = value;
               });
             },
 

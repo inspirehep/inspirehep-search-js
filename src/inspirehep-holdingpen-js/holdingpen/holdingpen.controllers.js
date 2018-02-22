@@ -81,7 +81,7 @@
     }
 
     function onBestMatchSelected(workflowId, match, showPossibleMatches) {
-      HoldingPenRecordService.onBestMatchSelected(workflowId, match, showPossibleMatches);       
+      HoldingPenRecordService.onBestMatchSelected($scope.vm.invenioSearchResults.hits.hits, workflowId, match, showPossibleMatches);       
     }
 
     function hasConflicts(record) {

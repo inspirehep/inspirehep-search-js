@@ -69,11 +69,11 @@
             </div>
           </div>
      </div>
-    <div ng-if="matchFound.length >= 1">
+    <div ng-if="matchFound.length > 0">
       <p> <i class="fa fa-check" aria-hidden="true"></i> Record was matched</p>
     </div>
-    <div ng-if="matchFound.length === 0 && noMatchFound.length === 0">
-      <p class="red-color"><i class="fa fa-exclamation-triangle icon-large"></i> There was an error while submitting your choice to the server.</p>
+    <div ng-if="noMatchFound.length > 0">
+      <p>No Matches</p>
     </div>
 </div>
 
