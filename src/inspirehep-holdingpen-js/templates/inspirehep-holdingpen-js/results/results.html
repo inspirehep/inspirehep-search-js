@@ -140,9 +140,11 @@
                 allKeywords = (record._source._extra_data.classifier_results.complete_output | unifyKeywords)"
               ng-if="record._source._extra_data.classifier_results.complete_output" class="small-text">
               <br/>
-              <p ng-class="{'accept_core_keyword': filteredKeywords.length > 1,
-                'accept_keyword': filteredKeywords.length < 2}">
-                {{filteredKeywords.length}} Filtered core keywords
+              <p ng-if="!record._source._extra_data.classifier_results.fulltext_used" ng-class="{'accept_core_keyword': filteredKeywords.length > 1,'accept_keyword': filteredKeywords.length < 2}">
+                {{filteredKeywords.length}} Filtered core keywords from metadata
+              </p>
+              <p ng-if="record._source._extra_data.classifier_results.fulltext_used" ng-class="{'accept_core_keyword': filteredKeywords.length > 1,'accept_keyword': filteredKeywords.length < 2}">
+                {{filteredKeywords.length}} Filtered core keywords from fulltext
               </p>
               <span
                 ng-repeat="keyword in allKeywords">
