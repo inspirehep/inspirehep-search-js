@@ -42,12 +42,9 @@ describe('Check holdingpen service', function() {
   it('should post data to correct url when best match selected', function(){
       var workflowId = 2,
           match = 123456,
-          showPossibleMatches = [],
-          data = JSON.stringify({
-                'match_recid': match 
-              });
+          data = { match_recid: match };
            
-      HoldingPenRecordService.onBestMatchSelected(vm, workflowId, match, showPossibleMatches);
+      HoldingPenRecordService.setMatchDecision(workflowId, match);
 
       httpBackend.expect('POST','/api/holdingpen/' + workflowId + '/action/resolve' , data).respond(200);
       

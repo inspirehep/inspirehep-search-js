@@ -83,16 +83,8 @@
               });
             },
 
-            onBestMatchSelected: function(vm, workflowId, match, showPossibleMatches) {
-              var data = JSON.stringify({
-                'match_recid': match 
-              });
-              
-              $http.post('/api/holdingpen/' + workflowId + '/action/resolve', data).then(function() {
-                showPossibleMatches.push(1);
-              }).catch(function(value) {
-                vm.error = value;
-              });
+            setMatchDecision: function(workflowId, match) {              
+              return $http.post('/api/holdingpen/' + workflowId + '/action/resolve', {match_recid: match});
             },
 
             setBatchDecision: function (records, selected_record_ids, decision) {

@@ -25,12 +25,16 @@
     $scope.vm.selected_records = [];
     $scope.vm.selected_record_decisions = {};
     $scope.vm.selected_record_methods = {};
+    $scope.selectedBestMatchesById = {};
+    $scope.matchDecisionMadeById = {};
+    $scope.matchedById = {};
     $scope.toggleSelection = toggleSelection;
     $scope.toggleAll = toggleAll;
     $scope.isChecked = isChecked;
     $scope.allChecked = allChecked;
     $scope.setDecision = setDecision;
     $scope.onBestMatchSelected = onBestMatchSelected;
+    $scope.onNoMatchSelected = onNoMatchSelected;
     $scope.redirect = redirect;
     $scope.hasConflicts = hasConflicts;
     $scope.hasValidationErrors = hasValidationErrors;
@@ -80,8 +84,20 @@
       HoldingPenRecordService.setBatchDecision($scope.vm.invenioSearchResults.hits.hits, [+id], decision);
     }
 
-    function onBestMatchSelected(workflowId, match, showPossibleMatches) {
-      HoldingPenRecordService.onBestMatchSelected($scope.vm.invenioSearchResults.hits.hits, workflowId, match, showPossibleMatches);       
+    function onBestMatchSelected(workflowId){
+      HoldingPenRecordService.setMatchDecision(workflowId, Number($scope.selectedBestMatchesById[workflowId]))
+        .then(function () {
+          $scope.matchedById[workflowId] = true;
+          $scope.matchDecisionMadeById[workflowId] = true;
+        });
+    }
+
+    function onNoMatchSelected(workflowId) {
+      HoldingPenRecordService.setMatchDecision(workflowId, null)
+      .then(function () {
+          $scope.matchedById[workflowId] = false;
+          $scope.matchDecisionMadeById[workflowId] = true;
+      });
     }
 
     function hasConflicts(record) {

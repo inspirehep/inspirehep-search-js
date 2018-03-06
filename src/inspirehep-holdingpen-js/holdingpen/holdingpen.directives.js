@@ -115,7 +115,8 @@
         $scope.vm.reason_index = 0;
         $scope.vm.reasons = [];
         $scope.modal = undefined;
-
+        $scope.vm.selectedBestMatch = null;
+        
         $scope.vm.inspire_categories = [
           'Accelerators',
           'Astrophysics',
@@ -160,6 +161,7 @@
           { value: 'PhD', text: 'PhD' },
           { value: 'Thesis', text: 'Thesis' }
         ];
+
 
         $scope.doUpdate = function () {
           $scope.vm.update_ready = true;
@@ -266,9 +268,21 @@
               });
           },
 
-          onBestMatchSelected: function(workflowId, match, showPossibleMatches){
-            HoldingPenRecordService.onBestMatchSelected($scope.vm, workflowId, match, showPossibleMatches);
-          }, 
+          onBestMatchSelected: function(){
+            HoldingPenRecordService.setMatchDecision($scope.vm.record.id, Number($scope.vm.selectedBestMatch))
+              .then(function () {
+                $scope.matched = true;
+                $scope.matchDecisionMade = true;
+              });
+          },
+
+          onNoMatchSelected: function() {
+            HoldingPenRecordService.setMatchDecision($scope.vm.record.id, null)
+            .then(function () {
+                $scope.matched = false;
+                $scope.matchDecisionMade = true;
+            });
+          },
           
           redirect: function (url) {
             $window.location = url;
