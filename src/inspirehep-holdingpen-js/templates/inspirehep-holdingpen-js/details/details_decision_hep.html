@@ -79,9 +79,13 @@
 <br/>
 <div class="decision-keywords">
   <p>
-    {{Utils.keys(vm.record._extra_data.classifier_results.complete_output['core_keywords']).length}} core keywords.
-    {{Utils.keys(vm.record._extra_data.classifier_results.complete_output['filtered_core_keywords']).length}} Filtered:
-
+    <p>
+      {{Utils.keys(vm.record._extra_data.classifier_results.complete_output['core_keywords']).length}} core keywords from {{vm.record._extra_data.classifier_results.fulltext_used ?'fulltext' : 'metadata'}}.
+    </p>
+    <p ng-init="filteredKeywordCount = Utils.keys(vm.record._extra_data.classifier_results.complete_output['filtered_core_keywords']).length">
+      {{filteredKeywordCount}} Filtered{{filteredKeywordCount > 0 ? ' :' : ''}}
+    </p>
+  </p>
   <div class="list">
     <div class="row"
          ng-repeat="keyword in vm.record._extra_data.classifier_results.complete_output['filtered_core_keywords']">
