@@ -102,7 +102,7 @@
                 <div ng-if="!matchDecisionMadeById[record._id]" ng-init="selectedBestMatchesById[record._id] = record._source._extra_data.matches.fuzzy[0]">
                     <p class="sub-heading">Possible Matches</p>
                       <div class="matchingRecords" ng-repeat="match in record._source._extra_data.matches.fuzzy">
-                        <input id="{{match}}" ng-model="selectedBestMatchesById[record._id]" name="possible-matches" type="radio" value="{{match}}"> 
+                        <input id="{{match}}" ng-model="selectedBestMatchesById[record._id]" name="possible-matches-{{record._id}}" type="radio" value="{{match}}"> 
                         <label for="{{match}}" class="custom-control-description">
                             literature/{{match}}
                         </label>
