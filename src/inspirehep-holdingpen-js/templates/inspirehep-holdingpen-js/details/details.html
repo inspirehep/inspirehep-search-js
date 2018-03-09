@@ -49,12 +49,12 @@
         </span>
       </p>
 
-      <p ng-if="Utils.hasCrawlErrors()">
+      <div ng-if="Utils.hasCrawlErrors()">
         <p ng-repeat="error in vm.record._extra_data.crawl_errors.errors">
             {{error.exception}}
         </p>
         <a href="#errors" style="color: white">View Stack Trace</a>
-      </p>
+      </div>
     </div>
   </div>
 </div>
