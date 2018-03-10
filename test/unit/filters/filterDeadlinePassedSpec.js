@@ -30,16 +30,9 @@ describe('Test Deadline Passed filter', function () {
     it('should return true if the date is in the future',
         inject(function (datePassedNowFilter) {
             // First generate a date in the future
-            var someDate = new Date();
+            var someDate = moment().format('YYYY-MM-DD');
             var numberOfDaysToAdd = 5;
-
-            someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
-
-            var dd = ("0" + (someDate.getDate() + 1)).slice(-2),
-                mm = ("0" + (someDate.getMonth() + 1)).slice(-2),
-                y = someDate.getFullYear();
-            var date = y + '-' + mm + '-' + dd;
-            console.log(date)
+            var date = moment(someDate).add(numberOfDaysToAdd, 'days').format('YYYY-MM-DD');
             expect(datePassedNowFilter(date)).to.be.equal(true);
         })
     );
@@ -48,6 +41,13 @@ describe('Test Deadline Passed filter', function () {
         inject(function (datePassedNowFilter) {
             var date = '2016-02-15';
             expect(datePassedNowFilter(date)).to.be.equal(false);
+        })
+    );
+
+    it('should false if the date is equal to the current date',
+        inject(function (datePassedNowFilter) {
+            var currentDate = moment().format('YYYY-MM-DD');
+            expect(datePassedNowFilter(currentDate)).to.be.equal(false);
         })
     );
 
