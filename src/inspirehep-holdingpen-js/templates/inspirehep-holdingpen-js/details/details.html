@@ -1,25 +1,23 @@
 <div class="row">
   <div class="col-md-12">
-    <div
-      ng-if="vm.record._extra_data.user_action && vm.record._extra_data._action === null"
-      class="alert" ng-class="'alert-' + vm.record._extra_data.user_action">
+    <div ng-if="vm.record._extra_data.user_action && vm.record._extra_data._action === null" class="alert" ng-class="'alert-' + vm.record._extra_data.user_action">
 
-        <span ng-switch="vm.record._extra_data.user_action">
-          <span ng-switch-when="reject">Rejected</span>
-          <span ng-switch-when="accept">Accepted as Non-CORE</span>
-          <span ng-switch-when="accept_core">Accepted as CORE</span>
-        </span>
-        <span ng-if="vm.record._extra_data.reason">
-          <a class="reason-link" href="#" ng-click="Utils.showRejectionReason()">
-            Show reason
-          </a>
-        </span>
-        <span ng-if="vm.record._extra_data.url">
-          -
-          <a class="reason-link" href="{{vm.record._extra_data.url}}" target="_blank">
-            {{vm.record._extra_data.url}}
-          </a>
-        </span>
+      <span ng-switch="vm.record._extra_data.user_action">
+        <span ng-switch-when="reject">Rejected</span>
+        <span ng-switch-when="accept">Accepted as Non-CORE</span>
+        <span ng-switch-when="accept_core">Accepted as CORE</span>
+      </span>
+      <span ng-if="vm.record._extra_data.reason">
+        <a class="reason-link" href="#" ng-click="Utils.showRejectionReason()">
+          Show reason
+        </a>
+      </span>
+      <span ng-if="vm.record._extra_data.url">
+        -
+        <a class="reason-link" href="{{vm.record._extra_data.url}}" target="_blank">
+          {{vm.record._extra_data.url}}
+        </a>
+      </span>
     </div>
 
     <div ng-if="vm.workflow_flag">
@@ -27,31 +25,25 @@
     </div>
 
 
-    <div class="alert"
-         ng-if="vm.record._extra_data._action || vm.record._workflow.status === 'ERROR'"
-         ng-class="{'alert-warning': vm.record._workflow.status === 'HALTED' && !vm.ingestion_complete,
+    <div class="alert" ng-if="vm.record._extra_data._action || vm.record._workflow.status === 'ERROR'" ng-class="{'alert-warning': vm.record._workflow.status === 'HALTED' && !vm.ingestion_complete,
          'alert-danger': vm.record._workflow.status === 'ERROR' && !vm.ingestion_complete,
          'alert-success': vm.record._workflow.status === 'COMPLETED' || vm.ingestion_complete,
          'alert-info': vm.record._workflow.status === 'WAITING'}">
 
       <p ng-if="vm.record._workflow.status === 'COMPLETED'">
         Record ingestion complete.</p>
-      <p
-        ng-if="vm.record._workflow.status !== 'COMPLETED' && !vm.ingestion_complete">
+      <p ng-if="vm.record._workflow.status !== 'COMPLETED' && !vm.ingestion_complete">
         <span ng-if="vm.record._workflow.status === 'WAITING'">Waiting to run...</span>
         <span ng-if="vm.record._workflow.status === 'RUNNING'">Workflow in progress...</span>
-        <span ng-repeat="item in vm.record._extra_data._task_history"
-              ng-if="(vm.record._workflow.status === 'HALTED' || vm.record._workflow.status === 'ERROR') && $last">
-          {{vm.record._workflow.status}} on {{item.nicename}} <a href="#errors"
-                                                                 ng-if="vm.record._workflow.status === 'ERROR'"
-                                                                 style="color: white">View
-          Stack Trace</a>
+        <span ng-repeat="item in vm.record._extra_data._task_history" ng-if="(vm.record._workflow.status === 'HALTED' || vm.record._workflow.status === 'ERROR') && $last">
+          {{vm.record._workflow.status}} on {{item.nicename}}
+          <a href="#errors" ng-if="vm.record._workflow.status === 'ERROR'" style="color: white">View Stack Trace</a>
         </span>
       </p>
 
       <div ng-if="Utils.hasCrawlErrors()">
         <p ng-repeat="error in vm.record._extra_data.crawl_errors.errors">
-            {{error.exception}}
+          {{error.exception}}
         </p>
         <a href="#errors" style="color: white">View Stack Trace</a>
       </div>
@@ -64,48 +56,40 @@
 
     <div class="row">
       <div class="col-md-12">
-        <div ng-if ="Utils.hasCrawlErrors()" class="detail-panel" id="hp-panel-detailed-info" >
+        <div ng-if="Utils.hasCrawlErrors()" class="detail-panel" id="hp-panel-detailed-info">
           <h4 class="record-title">
             {{vm.record._extra_data.crawl_errors.file_name}}
           </h4>
         </div>
-        <div ng-if ="!Utils.hasCrawlErrors()" class="detail-panel" id="hp-panel-detailed-info">
+        <div ng-if="!Utils.hasCrawlErrors()" class="detail-panel" id="hp-panel-detailed-info">
           <div ng-if="vm.record._workflow.data_type === 'hep'">
-            <h4 class="record-title"
-                ng-bind-html="vm.record.metadata.titles[0].title"
-                editable-text="vm.record.metadata.titles[0].title"
-                e-ng-change="Utils.registerUpdateEvent()"></h4>
+            <h4 class="record-title" ng-bind-html="vm.record.metadata.titles[0].title" editable-text="vm.record.metadata.titles[0].title"
+              e-ng-change="Utils.registerUpdateEvent()"></h4>
             <div ng-if="vm.record.metadata.publication_info" class="text-bolder">
               <p class="text-muted">{{vm.record.metadata.publication_info[0].journal_title}}, {{vm.record.metadata.publication_info[0].year}}</p>
             </div>
 
             <ul class="record-authors">
               {{ limit = 10; ""}}
-              <li
-                ng-repeat="author in vm.record.metadata.authors | limitTo : limit">
-                <span ng-if="author.full_name !== 'undefined'"
-                      ng-bind="author.full_name"></span>
+              <li ng-repeat="author in vm.record.metadata.authors | limitTo : limit">
+                <span ng-if="author.full_name !== 'undefined'" ng-bind="author.full_name"></span>
                 <span ng-if="author.affiliations">({{author.affiliations[0].value}})</span>
                 <span ng-if="!$last">;&nbsp;</span>
               </li>
-              <li ng-if="vm.record.metadata.authors.length > limit">and
-                {{vm.record.metadata.authors.length - limit}} others.
+              <li ng-if="vm.record.metadata.authors.length > limit">and {{vm.record.metadata.authors.length - limit}} others.
               </li>
             </ul>
 
 
-            <p class="record-abstract"
-               ng-bind-html="vm.record.metadata.abstracts[0].value"
-               editable-textarea="vm.record.metadata.abstracts[0].value"
-               e-ng-change="Utils.registerUpdateEvent()">
+            <p class="record-abstract" ng-bind-html="vm.record.metadata.abstracts[0].value" editable-textarea="vm.record.metadata.abstracts[0].value"
+              e-ng-change="Utils.registerUpdateEvent()">
             </p>
 
             <div ng-if="vm.record.metadata.license" class="row">
               <div class="col-md-12">
                 <span class="font-bolder">License:</span>
                 <span ng-bind="vm.record.metadata.license[0].url"></span>
-                <span class="font-bolder text-muted"
-                ng-if="vm.record.metadata.license[0].imposing"> imposed by
+                <span class="font-bolder text-muted" ng-if="vm.record.metadata.license[0].imposing"> imposed by
                   <span ng-bind="vm.record.metadata.license[0].imposing"></span>
                 </span>
               </div>
@@ -115,7 +99,7 @@
                 <span class="font-bolder">e-Print:</span>
                 <span ng-repeat="eprint in vm.record.metadata.arxiv_eprints">
                   <a href="http://arxiv.org/abs/{{eprint.value}}" target="_new">
-                  arXiv:{{eprint.value}}</a>&nbsp;[{{eprint.categories[0]}}]&nbsp;-&nbsp;
+                    arXiv:{{eprint.value}}</a>&nbsp;[{{eprint.categories[0]}}]&nbsp;-&nbsp;
                   <a href="http://arxiv.org/pdf/{{eprint.value}}" target="_new">
                     PDF
                   </a>
@@ -126,8 +110,7 @@
               <div class="col-md-12">
                 <span class="font-bolder">DOI:</span>
                 <span ng-repeat="doi in vm.record.metadata.dois">
-                  <a href="https://doi.org/{{doi.value}}" target="_new"
-                     ng-bind="doi.value"></a>
+                  <a href="https://doi.org/{{doi.value}}" target="_new" ng-bind="doi.value"></a>
                 </span>
 
               </div>
@@ -153,57 +136,43 @@
             <div ng-if="vm.record.metadata.title_translations" class="row">
               <div class="col-md-12">
                 <span class="font-bolder">Title translation:</span>
-                <span ng-bind="vm.record.metadata.title_translations[0].title"
-                      editable-text="vm.record.metadata.title_translations[0].title"
-                      e-ng-change="Utils.registerUpdateEvent()"
-                ></span>
+                <span ng-bind="vm.record.metadata.title_translations[0].title" editable-text="vm.record.metadata.title_translations[0].title"
+                  e-ng-change="Utils.registerUpdateEvent()"></span>
               </div>
             </div>
 
             <div ng-if="vm.record.metadata.collaborations" class="row">
               <div class="col-md-12">
                 <span class="font-bolder">Collaboration:</span>
-                <span ng-bind="vm.record.metadata.collaborations[0].value"
-                      editable-text="vm.record.metadata.collaborations[0].value"
-                      e-ng-change="Utils.registerUpdateEvent()"
-                ></span>
+                <span ng-bind="vm.record.metadata.collaborations[0].value" editable-text="vm.record.metadata.collaborations[0].value" e-ng-change="Utils.registerUpdateEvent()"></span>
               </div>
             </div>
 
             <div ng-if="vm.record.metadata.accelerator_experiments" class="row">
               <div class="col-md-12">
                 <span class="font-bolder">Experiment:</span>
-                <span ng-bind="vm.record.metadata.accelerator_experiments[0].legacy_name"
-                      editable-text="vm.record.metadata.accelerator_experiments[0].legacy_name"
-                      e-ng-change="Utils.registerUpdateEvent()"
-                ></span>
+                <span ng-bind="vm.record.metadata.accelerator_experiments[0].legacy_name" editable-text="vm.record.metadata.accelerator_experiments[0].legacy_name"
+                  e-ng-change="Utils.registerUpdateEvent()"></span>
               </div>
             </div>
 
           </div>
 
           <div ng-if="vm.record._workflow.data_type === 'authors'">
-            <h4 class="record-title"
-                ng-bind="vm.record.metadata.name.value"
-                editable-text="vm.record.metadata.name.value"
-                e-ng-change="Utils.registerUpdateEvent()"></h4>
+            <h4 class="record-title" ng-bind="vm.record.metadata.name.value" editable-text="vm.record.metadata.name.value" e-ng-change="Utils.registerUpdateEvent()"></h4>
 
             <div ng-if="vm.record.metadata.name.preferred_name" class="row">
               <div class="col-md-12">
                 <span class="font-bolder">Preferred name:</span>
-                <span ng-bind="vm.record.metadata.name.preferred_name"
-                      editable-text="vm.record.metadata.name.preferred_name"
-                      e-ng-change="Utils.registerUpdateEvent()"></span>
+                <span ng-bind="vm.record.metadata.name.preferred_name" editable-text="vm.record.metadata.name.preferred_name" e-ng-change="Utils.registerUpdateEvent()"></span>
               </div>
             </div>
 
             <div ng-if="vm.record.metadata.native_name" class="row">
               <div class="col-md-12">
                 <span class="font-bolder">Native name:</span>
-                <span ng-if="vm.record.metadata.native_name"
-                      ng-bind="vm.record.metadata.native_name"
-                      editable-text="vm.record.metadata.native_name"
-                      e-ng-change="Utils.registerUpdateEvent()">
+                <span ng-if="vm.record.metadata.native_name" ng-bind="vm.record.metadata.native_name" editable-text="vm.record.metadata.native_name"
+                  e-ng-change="Utils.registerUpdateEvent()">
                 </span>
               </div>
             </div>
@@ -242,56 +211,40 @@
 
       <div class="clearfix"></div>
 
-      <div class="col-md-12"
-           ng-if="vm.record._workflow.data_type == 'authors'">
-        <holding-pen-template-handler
-          template="/static/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/details/details_positions.html">
+      <div class="col-md-12" ng-if="vm.record._workflow.data_type == 'authors'">
+        <holding-pen-template-handler template="/static/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/details/details_positions.html">
         </holding-pen-template-handler>
       </div>
 
-      <div class="col-md-12"
-           ng-if="vm.record._workflow.data_type == 'authors'">
-        <holding-pen-template-handler
-          template="/static/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/details/details_experiments.html">
+      <div class="col-md-12" ng-if="vm.record._workflow.data_type == 'authors'">
+        <holding-pen-template-handler template="/static/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/details/details_experiments.html">
         </holding-pen-template-handler>
       </div>
 
       <div class="col-md-12">
-        <holding-pen-template-handler
-          template="/static/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/details/details_links.html">
+        <holding-pen-template-handler template="/static/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/details/details_links.html">
         </holding-pen-template-handler>
       </div>
 
-      <div class="col-md-6 col-sm-6"
-           ng-if="vm.record._workflow.data_type == 'hep' && !Utils.hasCrawlErrors()">
-        <holding-pen-template-handler
-          template="/static/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/details/details_subject_areas.html">
+      <div class="col-md-6 col-sm-6" ng-if="vm.record._workflow.data_type == 'hep' && !Utils.hasCrawlErrors()">
+        <holding-pen-template-handler template="/static/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/details/details_subject_areas.html">
         </holding-pen-template-handler>
       </div>
 
-      <div class="col-md-6 col-sm-6"
-           ng-if="vm.record._workflow.data_type == 'authors'">
-        <holding-pen-template-handler
-          template="/static/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/details/details_subject_areas.html">
+      <div class="col-md-6 col-sm-6" ng-if="vm.record._workflow.data_type == 'authors'">
+        <holding-pen-template-handler template="/static/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/details/details_subject_areas.html">
         </holding-pen-template-handler>
       </div>
 
-      <div class="col-md-6 col-sm-6"
-           ng-if="vm.record._workflow.data_type == 'authors'">
+      <div class="col-md-6 col-sm-6" ng-if="vm.record._workflow.data_type == 'authors'">
         <div class="detail-panel panel-300" id="hp-panel-advisors">
           <h4>Advisors</h4>
 
           <div class="advisors">
-            <div class="row"
-                 ng-repeat="advisor in vm.record.metadata.advisors">
-              <div class="col-md-6 col-sm-6" ng-bind="advisor.name"
-                   editable-text="advisor.name"
-                   e-ng-change="Utils.registerUpdateEvent()"></div>
-              <div class="col-md-6 col-sm-6"
-                   ng-bind="advisor.degree_type"
-                   editable-select="advisor.degree_type"
-                   e-ng-change="Utils.registerUpdateEvent()"
-                   e-ng-options="degree_type.value as degree_type.text for degree_type in degree_types"></div>
+            <div class="row" ng-repeat="advisor in vm.record.metadata.advisors">
+              <div class="col-md-6 col-sm-6" ng-bind="advisor.name" editable-text="advisor.name" e-ng-change="Utils.registerUpdateEvent()"></div>
+              <div class="col-md-6 col-sm-6" ng-bind="advisor.degree_type" editable-select="advisor.degree_type" e-ng-change="Utils.registerUpdateEvent()"
+                e-ng-options="degree_type.value as degree_type.text for degree_type in degree_types"></div>
             </div>
 
           </div>
@@ -299,29 +252,73 @@
       </div>
 
 
-      <div class="col-md-6 col-sm-6"
-           ng-if="vm.record._workflow.data_type == 'hep' && !Utils.hasCrawlErrors()">
-        <holding-pen-template-handler
-          template="/static/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/details/details_keywords.html">
+      <div class="col-md-6 col-sm-6" ng-if="vm.record._workflow.data_type == 'hep' && !Utils.hasCrawlErrors()">
+        <holding-pen-template-handler template="/static/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/details/details_keywords.html">
         </holding-pen-template-handler>
       </div>
 
       <div class="clearfix"></div>
 
       <div class="col-md-12" ng-if="vm.record._workflow.data_type == 'hep'">
-        <holding-pen-template-handler
-          template="/static/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/details/details_references.html">
+        <holding-pen-template-handler template="/static/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/details/details_references.html">
         </holding-pen-template-handler>
       </div>
 
       <div class="clearfix"></div>
 
 
-      <div class="col-md-12" id="errors"
-         ng-if="vm.record._workflow.status === 'ERROR'">
-        <holding-pen-template-handler
-          template="/static/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/details/details_errors.html">
+      <div class="col-md-12" id="errors" ng-if="vm.record._workflow.status === 'ERROR'">
+        <holding-pen-template-handler template="/static/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/details/details_errors.html">
         </holding-pen-template-handler>
+      </div>
+    </div>
+
+    <div class="row">
+      <div ng-if="vm.record._extra_data.matches.fuzzy && vm.record._workflow.data_type === 'hep' 
+        && vm.record._workflow.status === 'HALTED' && vm.record._extra_data._action == 'match_approval'" class="col-md-12">
+        <div class="matches-container detail-panel">
+          <div ng-if="!matchDecisionMade" ng-init="vm.selectedBestMatch = vm.record._extra_data.matches.fuzzy[0].control_number">
+            <h5>MATCHES</h5>
+            <div class="matchingRecords panel-group" id="matches-accordion" ng-repeat="match in vm.record._extra_data.matches.fuzzy">
+              <div class="panel">
+                <div class="panel-heading">
+                  <input id="{{match.control_number}}" ng-model="vm.selectedBestMatch" type="radio" value="{{match.control_number}}">
+                  <label for="{{match.control_number}}" class="custom-control-description panel-title" data-parent="#matches-accordion" data-toggle="collapse"
+                    data-target="#match-accordion-item-{{match.control_number}}">
+                    {{match.title}}
+                  </label>
+                  <a href="/literature/{{match.control_number}}" target="_blank">
+                    <i class="fa fa-external-link" aria-hidden="true"></i>
+                  </a>
+                </div>
+                <div id="match-accordion-item-{{match.control_number}}" class="panel-collapse collapse" ng-class="{ 'in': match.control_number == vm.selectedBestMatch }">
+                  <div class="panel-body">
+                    <p ng-if="match.authors" class="authors">
+                      <span ng-repeat="author in match.authors">{{author.full_name}}
+                        <span ng-if="!$last"> ; </span>
+                      </span>
+                    </p>
+                    <p ng-if="match.abstract">{{match.abstract}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div>
+              <button class="btn btn-primary best-match" type="submit" ng-click="Utils.onBestMatchSelected()"> Best Match
+              </button>
+              <button class="btn btn-primary no-match" ng-click="Utils.onNoMatchSelected()">
+                None of these
+              </button>
+            </div>
+          </div>
+          <div ng-if="matchDecisionMade" class="match-message-container">
+            <p class="text-muted" ng-if="matched">
+              <i class="fa fa-check" aria-hidden="true"></i> Record was matched</p>
+            <p class="text-muted" ng-if="!matched">No Matches</p>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -331,21 +328,16 @@
 
     <div class="row">
 
-      <div id="save-panel" class="col-md-12 text-center"
-           ng-if="vm.update_ready || vm.saved">
+      <div id="save-panel" class="col-md-12 text-center" ng-if="vm.update_ready || vm.saved">
         <div class="detail-panel" id="hp-panel-save-controls">
 
           <div id="hp-save" ng-if="vm.update_ready">
-            <button id="holdingpen-save-button"
-                    class="btn btn-success btn-lg"
-                    ng-if="vm.record._workflow.status === 'HALTED' && !vm.ingestion_complete"
-                    ng-click="Utils.updateRecord()">
+            <button id="holdingpen-save-button" class="btn btn-success btn-lg" ng-if="vm.record._workflow.status === 'HALTED' && !vm.ingestion_complete"
+              ng-click="Utils.updateRecord()">
               Save changes
             </button>
-            <button id="holdingpen-save-button"
-                    class="btn btn-success btn-lg"
-                    ng-if="vm.record._workflow.status !== 'HALTED' || vm.ingestion_complete"
-                    disabled>
+            <button id="holdingpen-save-button" class="btn btn-success btn-lg" ng-if="vm.record._workflow.status !== 'HALTED' || vm.ingestion_complete"
+              disabled>
               Can't save until state changes, try refreshing.
             </button>
           </div>
@@ -363,14 +355,12 @@
 
           <div class="decision">
             <div ng-if="vm.record._workflow.data_type === 'hep'">
-              <holding-pen-template-handler
-                template="/static/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/details/details_decision_hep.html">
+              <holding-pen-template-handler template="/static/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/details/details_decision_hep.html">
               </holding-pen-template-handler>
             </div>
 
             <div ng-if="vm.record._workflow.data_type === 'authors'">
-              <holding-pen-template-handler
-                template="/static/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/details/details_decision_authors.html">
+              <holding-pen-template-handler template="/static/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/details/details_decision_authors.html">
               </holding-pen-template-handler>
             </div>
           </div>
@@ -385,15 +375,16 @@
           <p class="text-center" ng-if="vm.record.metadata.acquisition_source">
             <span ng-switch="vm.record.metadata.acquisition_source.method">
               <span ng-switch-when="submitter">
-                Submitted by <i>{{vm.record.metadata.acquisition_source.email}}</i><br/> on <i>{{vm.record.metadata.acquisition_source.datetime | date : "dd/MM/yy HH:mm:ss"}}</i>
+                Submitted by
+                <i>{{vm.record.metadata.acquisition_source.email}}</i>
+                <br/> on
+                <i>{{vm.record.metadata.acquisition_source.datetime | date : "dd/MM/yy HH:mm:ss"}}</i>
               </span>
               <span ng-switch-default>
-                Harvested on <span class="font-bolder"
-                                   ng-bind="vm.record.metadata.acquisition_source.datetime"></span> from
-                <span class="font-bolder"
-                      ng-bind="vm.record.metadata.acquisition_source.source"></span> using
-                <span class="font-bolder"
-                      ng-bind="vm.record.metadata.acquisition_source.method"></span>
+                Harvested on
+                <span class="font-bolder" ng-bind="vm.record.metadata.acquisition_source.datetime"></span> from
+                <span class="font-bolder" ng-bind="vm.record.metadata.acquisition_source.source"></span> using
+                <span class="font-bolder" ng-bind="vm.record.metadata.acquisition_source.method"></span>
               </span>
             </span>
           </p>
@@ -406,13 +397,13 @@
           <h4>Notes</h4>
 
           <div class="row">
-              <div class="col-md-12 text-center">
-                <div ng-repeat="note in vm.record.metadata._private_notes">
-                <span
-                  ng-class="{'alert': note.value == '*Temporary entry*'}">
-                  <p ng-bind="note.value"></p></span>
-                </div>
+            <div class="col-md-12 text-center">
+              <div ng-repeat="note in vm.record.metadata._private_notes">
+                <span ng-class="{'alert': note.value == '*Temporary entry*'}">
+                  <p ng-bind="note.value"></p>
+                </span>
               </div>
+            </div>
           </div>
         </div>
       </div>
@@ -423,7 +414,9 @@
           <h4>RT information</h4>
 
           <div class="text-center" ng-if="vm.record._extra_data.ticket_id">
-            <p><a href="https://rt.inspirehep.net/Ticket/Display.html?id={{vm.record._extra_data.ticket_id}}" target="_new">See related ticket (#{{vm.record._extra_data.ticket_id}})</a></p>
+            <p>
+              <a href="https://rt.inspirehep.net/Ticket/Display.html?id={{vm.record._extra_data.ticket_id}}" target="_new">See related ticket (#{{vm.record._extra_data.ticket_id}})</a>
+            </p>
           </div>
         </div>
       </div>
@@ -438,18 +431,13 @@
           </div>
 
           <div class="text-center" ng-if="vm.record._workflow.status!=='COMPLETED'">
-            <button class="btn btn-default"
-              ng-click="Utils.restartWorkflow()">
-            <i class="fa fa-repeat" aria-hidden="true"></i> Restart workflow
+            <button class="btn btn-default" ng-click="Utils.restartWorkflow()">
+              <i class="fa fa-repeat" aria-hidden="true"></i> Restart workflow
             </button>
-            <button class="btn btn-info"
-                    ng-if="vm.record._workflow.status === 'HALTED' || Utils.hasValidationErrors()"
-                    ng-click="Utils.saveAndRedirect('/editor/holdingpen/' + vm.record.id)">
+            <button class="btn btn-info" ng-if="vm.record._workflow.status === 'HALTED' || Utils.hasValidationErrors()" ng-click="Utils.saveAndRedirect('/editor/holdingpen/' + vm.record.id)">
               <i class="fa fa-pencil" aria-hidden="true"></i> Open in Editor
             </button>
-            <button class="btn btn-default"
-                    ng-if="vm.record._workflow.status !== 'HALTED'"
-                    ng-click="Utils.resumeWorkflow()">
+            <button class="btn btn-default" ng-if="vm.record._workflow.status !== 'HALTED'" ng-click="Utils.resumeWorkflow()">
               <i class="fa fa-play" aria-hidden="true"></i> Skip to next step
             </button>
           </div>
@@ -467,8 +455,7 @@
 
     <div class="alert alert-danger-area">
       <p class="pull-left">Danger Area</p>
-      <button ng-click="Utils.deleteRecord()"
-              class="btn btn-danger pull-right">
+      <button ng-click="Utils.deleteRecord()" class="btn btn-danger pull-right">
         Delete
       </button>
     </div>

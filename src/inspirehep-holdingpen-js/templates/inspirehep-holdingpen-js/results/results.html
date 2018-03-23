@@ -95,35 +95,7 @@
                   ng-bind="(record._source._extra_data.relevance_prediction.max_score | number : 2)"></span>
                 </span>
               </p>
-            </div>
-            
-            <div ng-if="record._source._extra_data.matches.fuzzy && record._source._workflow.data_type === 'hep' && record._source._workflow.status === 'HALTED' && record._source._extra_data._action === 'match_approval'"
-            class="matches-container">
-                <div ng-if="!matchDecisionMadeById[record._id]" ng-init="selectedBestMatchesById[record._id] = record._source._extra_data.matches.fuzzy[0]">
-                    <p class="sub-heading">Possible Matches</p>
-                      <div class="matchingRecords" ng-repeat="match in record._source._extra_data.matches.fuzzy">
-                        <input id="{{match}}" ng-model="selectedBestMatchesById[record._id]" name="possible-matches-{{record._id}}" type="radio" value="{{match}}"> 
-                        <label for="{{match}}" class="custom-control-description">
-                            literature/{{match}}
-                        </label>
-                        <a href="/literature/{{match}}" target="_blank">
-                          <i class="fa fa-external-link" aria-hidden="true"></i>
-                        </a>
-                      </div>
-                      <div>
-                        <button class="btn btn-primary best-match" type="submit"
-                          ng-click="onBestMatchSelected(record._id)"> Best Match
-                        </button>
-                        <button class="btn btn-primary no-match" ng-click="onNoMatchSelected(record._id)">
-                          None of these
-                        </button>
-                      </div>
-                 </div>
-                <div ng-if="matchDecisionMadeById[record._id]">
-                  <p ng-if="matchedById[record._id]"><i class="fa fa-check" aria-hidden="true"></i> Record was matched</p>
-                  <p ng-if="!matchedById[record._id]">No Matches</p>
-                </div>
-             </div>
+            </div> 
 
             <div
               ng-if="record._source._workflow.data_type === 'hep' && !record._source.wo.user_action && record._source._workflow.status === 'HALTED' && record._source._extra_data._action === 'hep_approval'">
@@ -233,6 +205,46 @@
 
         </div>
       </div>
+    </div>
+      <div class="col-md-12 matches-container" ng-if="record._source._extra_data.matches.fuzzy && record._source._workflow.data_type === 'hep' && record._source._workflow.status === 'HALTED' && record._source._extra_data._action === 'match_approval'">
+          <div ng-if="!matchDecisionMadeById[record._id]" ng-init="selectedBestMatchesById[record._id] = record._source._extra_data.matches.fuzzy[0].control_number">
+                <h5>MATCHES</h5>
+                <div class="matchingRecords panel-group" id="matches-accordion-{{record._id}}" ng-repeat="match in record._source._extra_data.matches.fuzzy">
+                  <div class="panel">
+                    <div class="panel-heading">
+                        <input id="radio-{{record._id}}-{{match.control_number}}" ng-model="selectedBestMatchesById[record._id]" name="possible-matches-{{record._id}}" type="radio" value="{{match.control_number}}">
+                        <label for="radio-{{record._id}}-{{match.control_number}}" class="custom-control-description panel-title" data-parent="#matches-accordion-{{record._id}}" data-toggle="collapse" data-target="#match-accordion-item-{{record._id}}-{{match.control_number}}">
+                            {{match.title}}
+                        </label>
+                        <a href="/literature/{{match.control_number}}" target="_blank">
+                          <i class="fa fa-external-link" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                    <div id="#match-accordion-item-{{record._id}}-{{match.control_number}}" class="panel-collapse collapse" ng-class="{ 'in': match.control_number == selectedBestMatchesById[record._id] }">
+                        <div class="panel-body">
+                          <p ng-if="match.authors" class="authors">
+                            <span ng-repeat="author in match.authors">{{author.full_name}} <span ng-if="!$last"> ; </span> </span>
+                          </p>
+                          <p ng-if="match.abstract">{{match.abstract}}</p>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+                <div>
+                  <button class="btn btn-primary best-match" type="submit"
+                    ng-click="onBestMatchSelected(record._id)"> Best Match
+                  </button>
+                  <button class="btn btn-primary no-match" ng-click="onNoMatchSelected(record._id)">
+                    None of these
+                  </button>
+                </div>
+          </div>
+          <div  class="match-message-container" ng-if="matchDecisionMadeById[record._id]">
+            <p class="text-muted" ng-if="matchedById[record._id]"><i class="fa fa-check" aria-hidden="true"></i> Record was matched</p>
+            <p class="text-muted" ng-if="!matchedById[record._id]">No Matches</p>
+          </div>
+       </div>
     </div>
   </div>
 </div>

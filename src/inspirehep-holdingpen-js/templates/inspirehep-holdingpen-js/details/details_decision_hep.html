@@ -46,35 +46,6 @@
   <p>No further actions available</p>
 </div>
 
-<div ng-if="vm.record._extra_data.matches.fuzzy && vm.record._workflow.data_type === 'hep' 
-            && vm.record._workflow.status === 'HALTED' && vm.record._extra_data._action == 'match_approval'"
-            class="matches-container">
-    <div ng-if="!matchDecisionMade" ng-init="vm.selectedBestMatch = vm.record._extra_data.matches.fuzzy[0]">
-        <p class="sub-heading">Possible Matches</p>
-          <div class="matchingRecords" ng-repeat="match in vm.record._extra_data.matches.fuzzy">
-            <input id="{{match}}" ng-model="vm.selectedBestMatch" name="possible-matches" type="radio" value="{{match}}"> 
-            <label for="{{match}}" class="custom-control-description">
-                literature/{{match}}
-            </label>
-            <a href="/literature/{{match}}" target="_blank">
-              <i class="fa fa-external-link" aria-hidden="true"></i>
-            </a>
-          </div>
-          <div>
-            <button class="btn btn-primary best-match" type="submit"
-              ng-click="Utils.onBestMatchSelected()"> Best Match
-            </button>
-            <button class="btn btn-primary no-match" ng-click="Utils.onNoMatchSelected()">
-              None of these
-            </button>
-          </div>
-     </div>
-    <div ng-if="matchDecisionMade">
-      <p ng-if="matched"><i class="fa fa-check" aria-hidden="true"></i> Record was matched</p>
-      <p ng-if="!matched">No Matches</p>
-    </div>
-</div>
-
 <div class="clearfix"></div>
 <br/>
 <div class="decision-keywords">
