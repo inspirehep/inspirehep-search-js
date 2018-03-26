@@ -30,10 +30,8 @@ describe('Test Deadline Passed filter', function () {
     it('should return true if the date is in the future',
         inject(function (datePassedNowFilter) {
             // First generate a date in the future
-            var someDate = new Date();
-            var numberOfDaysToAdd = 5;
-
-            someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
+            var now = new Date();
+            var someDate = new Date(now.getFullYear(), now.getMonth() + 1, 1);
 
             var dd = ("0" + (someDate.getDate() + 1)).slice(-2),
                 mm = ("0" + (someDate.getMonth() + 1)).slice(-2),
