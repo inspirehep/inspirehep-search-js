@@ -1,5 +1,6 @@
 <div
-  ng-init="order={'status': 'Status', 'source': 'Source', 'workflow_name': 'Collection', 'subject': 'Subject', 'decision': 'Decision'}">
+  ng-init="order={'status': 'Status', 'source': 'Source',
+   'workflow_name': 'Collection', 'subject': 'Subject', 'decision': 'Decision', 'pending_action': 'Pending Action'}">
   <div ng-if="vm.invenioSearchResults.aggregations[key].buckets.length"
        ng-repeat="(key, title) in order" class="facet-container">
     <h4>Filter by {{ title }}</h4>
@@ -19,6 +20,8 @@
             <span ng-switch-when="INITIAL" class="inprogress"><i class="fa fa fa-circle-o"></i> Preparing</span>
             <span ng-switch-when="COMPLETED" class="completed"><i class="fa fa-check"></i> Completed</span>
             <span ng-switch-when="HALTED" class="halted"><i class="fa fa fa-pause"></i> Awaiting Decision</span>
+            <span ng-switch-when="match_approval">Matching</span>
+            <span ng-switch-when="hep_approval">Core Selection</span>
             <span ng-switch-default>{{ item.key }}</span>
           </span>
         </span>
