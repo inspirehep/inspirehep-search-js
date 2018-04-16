@@ -102,8 +102,7 @@
     }
 
     function hasConflicts(record) {
-      var _extra_data =  record._source._extra_data;
-      return _extra_data && _extra_data.conflicts !== undefined && _extra_data.conflicts.length > 0;
+      return HoldingPenRecordService.hasConflicts(record._source);
     }
     function hasValidationErrors(record) {
       return HoldingPenRecordService.hasValidationErrors(record._source);

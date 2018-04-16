@@ -160,6 +160,11 @@
     
               var _extra_data = workflow._extra_data;
               return _extra_data && _extra_data.crawl_errors;
+            },
+
+            hasConflicts: function (record) {
+              var _extra_data =  record._extra_data;
+              return _extra_data && _extra_data.conflicts !== undefined && _extra_data.conflicts.length > 0;
             }
           };
         }

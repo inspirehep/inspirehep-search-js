@@ -467,7 +467,7 @@
             <button class="btn btn-default" ng-click="Utils.restartWorkflow()">
               <i class="fa fa-repeat" aria-hidden="true"></i> Restart workflow
             </button>
-            <button class="btn btn-info" ng-if="vm.record._workflow.status === 'HALTED' || Utils.hasValidationErrors()" ng-click="Utils.saveAndRedirect('/editor/holdingpen/' + vm.record.id)">
+            <button class="btn btn-info" ng-if="vm.record._workflow.status === 'HALTED' || Utils.hasValidationErrors() || Utils.hasConflicts()" ng-click="Utils.saveAndRedirect('/editor/holdingpen/' + vm.record.id)">
               <i class="fa fa-pencil" aria-hidden="true"></i> Open in Editor
             </button>
             <button class="btn btn-default" ng-if="vm.record._workflow.status !== 'HALTED'" ng-click="Utils.resumeWorkflow()">

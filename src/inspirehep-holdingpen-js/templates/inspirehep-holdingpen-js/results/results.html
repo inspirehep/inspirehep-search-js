@@ -97,14 +97,14 @@
               </p>
             </div> 
 
+            <div ng-if="record._source._workflow.data_type === 'hep' && hasConflicts(record)">
+              <a class="btn btn-warning"
+                href="/editor/holdingpen/{{record._id}}">Resolve Conflicts
+              </a>
+            </div>
+
             <div
-              ng-if="record._source._workflow.data_type === 'hep' && !record._source.wo.user_action && record._source._workflow.status === 'HALTED' && record._source._extra_data._action === 'hep_approval'">
-              <div ng-if="hasConflicts(record)">
-                  <a class="btn btn-warning"
-                    href="/editor/holdingpen/{{record._id}}">Resolve Conflicts
-                  </a>
-              </div>
-              <div ng-if="!hasConflicts(record)">
+              ng-if="record._source._workflow.data_type === 'hep' && !record._source.wo.user_action && record._source._workflow.status === 'HALTED' && record._source._extra_data._action === 'hep_approval' && !hasConflicts(record)">
                 <button class="btn btn-success"
                         ng-click="setDecision(record._id,'accept_core')">Core
                 </button>
@@ -132,7 +132,6 @@
                         class="btn btn-danger"
                         ng-click="redirect('/holdingpen/' + record._id)">Reject
                 </button>
-              </div>
             </div>
 
             <br/>
