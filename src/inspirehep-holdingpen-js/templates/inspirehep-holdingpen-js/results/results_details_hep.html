@@ -18,44 +18,50 @@
 
 <h4 class="custom-h">
 
-  <a class="title" ng-if="record._source.metadata.titles && !hasCrawlErrors(record)" ng-href="/holdingpen/{{record._id}}" ng-bind-html='record._source.metadata.titles[0].title'></a>
-  <a class="title" ng-if="hasCrawlErrors(record)" ng-href="/holdingpen/{{record._id}}">
+   <a class="title" ng-if="record._source.metadata.titles && !hasCrawlErrors(record)" ng-href="/holdingpen/{{record._id}}" ng-bind-html='record._source.metadata.titles[0].title'></a>
+   <a class="title" ng-if="hasCrawlErrors(record)" ng-href="/holdingpen/{{record._id}}">
     {{record._source._extra_data.crawl_errors.file_name}}
   </a>
 </h4>
 
 <div class="authors" ng-if="record._source.metadata.authors">
-  <span ng-repeat="author in record._source.metadata.authors | limitTo:10">
-    {{author.full_name}}
-    <span ng-if="!$last">; </span>
-    <span ng-if="$last && record._source.metadata.authors.length > 10">; et al. </span>
-  </span>({{ record._source.metadata.authors.length }} Authors)
+    <span ng-repeat="author in record._source.metadata.authors | limitTo:10">
+      {{author.full_name}}<span ng-if="!$last">; </span><span
+      ng-if="$last && record._source.metadata.authors.length > 10">; et al. </span>
+    </span>
+    <span ng-if="record._source.metadata.authors.length > 1">({{ record._source.metadata.authors.length }} authors)</span>
 </div>
 
-<dl class="dl-horizontal">
+  <dl class="dl-horizontal">
 
-  <dt ng-if="record._source.metadata.publication_info">Published In</dt>
-  <dd>
-    <span class="regular-text" ng-repeat="pub_info in record._source.metadata.publication_info">
-      <span ng-if="pub_info.journal_title">{{pub_info.journal_title}}</span>
-      <span ng-if="pub_info.journal_volume">{{pub_info.journal_volume}}</span>
-      <span ng-if="pub_info.year">({{pub_info.year}})</span>
-      <span ng-if="pub_info.journal_issue"> {{pub_info.journal_issue}}</span>
-      <span ng-if="pub_info.artid">, {{pub_info.artid}}</span>
-      <span ng-if="!$last"> ; </span>
-    </span>
-  </dd>
+    <dt ng-if="record._source.metadata.publication_info && record._source.metadata.publication_info[0] && (record._source.metadata.publication_info[0].journal_title || record._source.metadata.publication_info[0].pubinfo_freetext)">Published In</dt>
+    <dd>
+      <span ng-repeat="pub_info in record._source.metadata.publication_info">
+        <span ng-if="pub_info.journal_title">
+          {{pub_info.journal_title}}
+          <span ng-if="pub_info.journal_volume"> {{pub_info.journal_volume}}</span>
+          <span ng-if="pub_info.year"> ({{pub_info.year}})</span>
+          <span ng-if="pub_info.journal_issue"> {{pub_info.journal_issue}}</span>  
+          <span ng-if="pub_info.page_start && pub_info.page_end">
+            {{pub_info.page_start}}
+            <span ng-if="pub_info.page_end">-{{pub_info.page_end}}</span>
+          </span>
+          <span ng-if="pub_info.artid">, {{pub_info.artid}}</span>
+        </span>
+        <span ng-if="!pub_info.journal_title && pub_info.pubinfo_freetext">{{pub_info.pubinfo_freetext}}</span>
+        <span ng-if="!$last"> ; </span>
+      </span>
+    </dd>
 
-  <dt ng-if="record._source.metadata.number_of_pages">Number of Pages</dt>
-  <dd>{{record._source.metadata.number_of_pages}}</dd>
+    <dt ng-if="record._source.metadata.number_of_pages">Number of Pages</dt>
+    <dd>{{record._source.metadata.number_of_pages}}</dd>
 
-  <dt ng-if="record._source.metadata.public_notes">Public notes</dt>
-  <dd>
-    <span ng-if="record._source.metadata.public_notes.length === 1" class="regular-text">{{record._source.metadata.public_notes[0].value}}</span>
-    <ul ng-if="record._source.metadata.public_notes.length > 1">
-      <li ng-repeat="public_note in record._source.metadata.public_notes">{{public_note.value}}</li>
-    </ul>
-  </dd>
+    <dt ng-if="record._source.metadata.public_notes">Public notes</dt>
+    <dd>
+      <ul ng-if="record._source.metadata.public_notes" class="public-notes">
+        <li ng-repeat="public_note in record._source.metadata.public_notes">{{public_note.value}}</li>
+      </ul>
+    </dd>
 
 </dl>
 

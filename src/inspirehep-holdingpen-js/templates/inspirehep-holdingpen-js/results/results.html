@@ -223,19 +223,26 @@
                         <div class="panel-body">
                           <div ng-if="match.authors" class="authors">
                             <span ng-repeat="author in match.authors">{{author.full_name}} <span ng-if="!$last"> ; </span> </span>
-                            <span ng-if="match.authors_count">({{match.authors_count}} Authors)</span>
+                            <span ng-if="match.authors_count > 1">({{match.authors_count}} authors)</span>
                           </div>
 
                           <dl class="dl-horizontal">
 
-                            <dt ng-if="match.publication_info">Published In</dt>
+                            <dt ng-if="match.publication_info && match.publication_info[0] && (match.publication_info[0].journal_title || match.publication_info[0].pubinfo_freetext) ">Published In</dt>
                             <dd>
                               <span ng-repeat="pub_info in match.publication_info">
-                                <span ng-if="pub_info.journal_title">{{pub_info.journal_title}}</span>
-                                <span ng-if="pub_info.journal_volume">{{pub_info.journal_volume}}</span>
-                                <span ng-if="pub_info.year">({{pub_info.year}})</span>
-                                <span ng-if="pub_info.journal_issue"> {{pub_info.journal_issue}}</span>
-                                <span ng-if="pub_info.artid">, {{pub_info.artid}}</span>  
+                                <span ng-if="pub_info.journal_title">
+                                  {{pub_info.journal_title}}
+                                  <span ng-if="pub_info.journal_volume"> {{pub_info.journal_volume}}</span>
+                                  <span ng-if="pub_info.year"> ({{pub_info.year}})</span>
+                                  <span ng-if="pub_info.journal_issue"> {{pub_info.journal_issue}}</span>  
+                                  <span ng-if="pub_info.page_start && pub_info.page_end">
+                                    {{pub_info.page_start}}
+                                    <span ng-if="pub_info.page_end">-{{pub_info.page_end}}</span>
+                                  </span>
+                                  <span ng-if="pub_info.artid">, {{pub_info.artid}}</span>
+                                </span>
+                                <span ng-if="!pub_info.journal_title && pub_info.pubinfo_freetext">{{pub_info.pubinfo_freetext}}</span>
                                 <span ng-if="!$last"> ; </span>
                               </span>
                             </dd>
@@ -251,16 +258,15 @@
 
                             <dt ng-if="match.public_notes">Public notes</dt>
                             <dd>
-                              <span ng-if="match.public_notes.length === 1">{{match.public_notes[0].value}}</span>
-                              <ul ng-if="match.public_notes.length > 1">
+                              <ul ng-if="match.public_notes">
                                 <li ng-repeat="public_note in match.public_notes">{{public_note.value}}</li>
                               </ul>
                             </dd>
                           </dl>
                             
-                          <div ng-init="showAbstract=false">
+                          <div ng-init="showAbstract=false" ng-if="match.abstract">
                             <a href="" ng-click='showAbstract=!showAbstract'>{{ showAbstract ? 'Hide abstract' : 'Show abstract'}}</a>
-                            <p ng-if="match.abstract && showAbstract">{{match.abstract}}</p>
+                            <p ng-if="showAbstract">{{match.abstract}}</p>
                           </div>
                         </div>
                     </div>
