@@ -53,6 +53,9 @@
       </span>
     </dd>
 
+    <dt ng-if="record._source.metadata.arxiv_eprints">e-Print</dt>
+    <dd>{{record._source.metadata.arxiv_eprints[0].value}}</dd>
+
     <dt ng-if="record._source.metadata.number_of_pages">Number of Pages</dt>
     <dd>{{record._source.metadata.number_of_pages}}</dd>
 
