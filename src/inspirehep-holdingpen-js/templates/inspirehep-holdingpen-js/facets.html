@@ -21,6 +21,7 @@
             <span ng-switch-when="COMPLETED" class="completed"><i class="fa fa-check"></i> Completed</span>
             <span ng-switch-when="HALTED" class="halted"><i class="fa fa fa-pause"></i> Awaiting Decision</span>
             <span ng-switch-when="match_approval">Matching</span>
+            <span ng-switch-when="merge_approval">Merging</span>
             <span ng-switch-when="hep_approval">Core Selection</span>
             <span ng-switch-default>{{ item.key }}</span>
           </span>
