@@ -135,6 +135,12 @@
             </div>
 
             <br/>
+            <div ng-if="record._source._extra_data.reference_count">
+              <p class="small-text">References: <strong>{{record._source._extra_data.reference_count.core}}/{{record._source.metadata.references.length}}</strong> core,
+                <strong>{{record._source._extra_data.reference_count.core + record._source._extra_data.reference_count.non_core}}/{{record._source.metadata.references.length}}</strong>
+                matched</p>
+            </div>
+
             <div
               ng-init="filteredKeywords = record._source._extra_data.classifier_results.complete_output['filtered_core_keywords'];
                 allKeywords = (record._source._extra_data.classifier_results.complete_output | unifyKeywords)"
