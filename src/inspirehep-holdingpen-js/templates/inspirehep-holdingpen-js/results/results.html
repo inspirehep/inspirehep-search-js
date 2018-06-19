@@ -208,67 +208,66 @@
       <div class="col-md-12 matches-container" ng-if="record._source._extra_data.matches.fuzzy && record._source._workflow.data_type === 'hep' && record._source._workflow.status === 'HALTED' && record._source._extra_data._action === 'match_approval'">
           <div ng-if="!matchDecisionMadeById[record._id]" ng-init="selectedBestMatchesById[record._id] = record._source._extra_data.matches.fuzzy[0].control_number">
                 <h5>MATCHES</h5>
-                <div class="matchingRecords panel-group" id="matches-accordion-{{record._id}}" ng-repeat="match in record._source._extra_data.matches.fuzzy">
+                <div class="matchingRecords panel-group" ng-repeat="match in record._source._extra_data.matches.fuzzy">
                   <div class="panel">
                     <div class="panel-heading">
                         <input id="radio-{{record._id}}-{{match.control_number}}" ng-model="selectedBestMatchesById[record._id]" name="possible-matches-{{record._id}}" type="radio" value="{{match.control_number}}">
-                        <label for="radio-{{record._id}}-{{match.control_number}}" class="custom-control-description panel-title" data-parent="#matches-accordion-{{record._id}}" data-toggle="collapse" data-target="#match-accordion-item-{{record._id}}-{{match.control_number}}">
+                        <label for="radio-{{record._id}}-{{match.control_number}}" class="custom-control-description panel-title">
                             {{match.title}}
                         </label>
                         <a href="/literature/{{match.control_number}}" target="_blank">
                           <i class="fa fa-external-link" aria-hidden="true"></i>
                         </a>
                     </div>
-                    <div id="#match-accordion-item-{{record._id}}-{{match.control_number}}" class="panel-collapse collapse" ng-class="{ 'in': match.control_number == selectedBestMatchesById[record._id] }">
-                        <div class="panel-body">
-                          <div ng-if="match.authors" class="authors">
-                            <span ng-repeat="author in match.authors">{{author.full_name}} <span ng-if="!$last"> ; </span> </span>
-                            <span ng-if="match.authors_count > 1">({{match.authors_count}} authors)</span>
-                          </div>
+                    
+                    <div class="panel-body">
+                      <div ng-if="match.authors" class="authors">
+                        <span ng-repeat="author in match.authors">{{author.full_name}} <span ng-if="!$last"> ; </span> </span>
+                        <span ng-if="match.authors_count > 1">({{match.authors_count}} authors)</span>
+                      </div>
 
-                          <dl class="dl-horizontal">
+                      <dl class="dl-horizontal">
 
-                            <dt ng-if="match.publication_info && match.publication_info[0] && (match.publication_info[0].journal_title || match.publication_info[0].pubinfo_freetext) ">Published In</dt>
-                            <dd>
-                              <span ng-repeat="pub_info in match.publication_info">
-                                <span ng-if="pub_info.journal_title">
-                                  {{pub_info.journal_title}}
-                                  <span ng-if="pub_info.journal_volume"> {{pub_info.journal_volume}}</span>
-                                  <span ng-if="pub_info.year"> ({{pub_info.year}})</span>
-                                  <span ng-if="pub_info.journal_issue"> {{pub_info.journal_issue}}</span>  
-                                  <span ng-if="pub_info.page_start && pub_info.page_end">
-                                    {{pub_info.page_start}}
-                                    <span ng-if="pub_info.page_end">-{{pub_info.page_end}}</span>
-                                  </span>
-                                  <span ng-if="pub_info.artid">, {{pub_info.artid}}</span>
-                                </span>
-                                <span ng-if="!pub_info.journal_title && pub_info.pubinfo_freetext">{{pub_info.pubinfo_freetext}}</span>
-                                <span ng-if="!$last"> ; </span>
+                        <dt ng-if="match.publication_info && match.publication_info[0] && (match.publication_info[0].journal_title || match.publication_info[0].pubinfo_freetext) ">Published In</dt>
+                        <dd>
+                          <span ng-repeat="pub_info in match.publication_info">
+                            <span ng-if="pub_info.journal_title">
+                              {{pub_info.journal_title}}
+                              <span ng-if="pub_info.journal_volume"> {{pub_info.journal_volume}}</span>
+                              <span ng-if="pub_info.year"> ({{pub_info.year}})</span>
+                              <span ng-if="pub_info.journal_issue"> {{pub_info.journal_issue}}</span>  
+                              <span ng-if="pub_info.page_start && pub_info.page_end">
+                                {{pub_info.page_start}}
+                                <span ng-if="pub_info.page_end">-{{pub_info.page_end}}</span>
                               </span>
-                            </dd>
+                              <span ng-if="pub_info.artid">, {{pub_info.artid}}</span>
+                            </span>
+                            <span ng-if="!pub_info.journal_title && pub_info.pubinfo_freetext">{{pub_info.pubinfo_freetext}}</span>
+                            <span ng-if="!$last"> ; </span>
+                          </span>
+                        </dd>
 
-                            <dt ng-if="match.arxiv_eprint">e-Print</dt>
-                            <dd>{{match.arxiv_eprint}}</dd>
+                        <dt ng-if="match.arxiv_eprint">e-Print</dt>
+                        <dd>{{match.arxiv_eprint}}</dd>
 
-                            <dt ng-if="match.number_of_pages">Number of Pages</dt>
-                            <dd>{{match.number_of_pages}}</dd>
+                        <dt ng-if="match.number_of_pages">Number of Pages</dt>
+                        <dd>{{match.number_of_pages}}</dd>
 
-                            <dt ng-if="match.earliest_date">Date</dt>
-                            <dd>{{ match.earliest_date }}</dd>
+                        <dt ng-if="match.earliest_date">Date</dt>
+                        <dd>{{ match.earliest_date }}</dd>
 
-                            <dt ng-if="match.public_notes">Public notes</dt>
-                            <dd>
-                              <ul ng-if="match.public_notes">
-                                <li ng-repeat="public_note in match.public_notes">{{public_note.value}}</li>
-                              </ul>
-                            </dd>
-                          </dl>
-                            
-                          <div ng-init="showAbstract=false" ng-if="match.abstract">
-                            <a href="" ng-click='showAbstract=!showAbstract'>{{ showAbstract ? 'Hide abstract' : 'Show abstract'}}</a>
-                            <p ng-if="showAbstract">{{match.abstract}}</p>
-                          </div>
-                        </div>
+                        <dt ng-if="match.public_notes">Public notes</dt>
+                        <dd>
+                          <ul ng-if="match.public_notes">
+                            <li ng-repeat="public_note in match.public_notes">{{public_note.value}}</li>
+                          </ul>
+                        </dd>
+                      </dl>
+                        
+                      <div ng-init="showAbstract=false" ng-if="match.abstract">
+                        <a href="" ng-click='showAbstract=!showAbstract'>{{ showAbstract ? 'Hide abstract' : 'Show abstract'}}</a>
+                        <p ng-if="showAbstract">{{match.abstract}}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
