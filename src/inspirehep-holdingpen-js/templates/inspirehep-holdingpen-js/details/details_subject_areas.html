@@ -16,9 +16,7 @@
         </div>
       </div>
       <div class="clearfix"></div>
-
-      <div ng-init="categories = vm.record.metadata.inspire_categories || vm.record.metadata.arxiv_categories">
-        <div class="row subject-area" ng-repeat="subject_term in categories">
+        <div class="row subject-area" ng-repeat="subject_term in (vm.record.metadata.inspire_categories || vm.record.metadata.arxiv_categories)">
           <div class="col-md-9 col-sm-9 col-xs-8">{{subject_term.term || subject_term}}</div>
           <div class="col-md-2 col-sm-2 col-xs-3">
           <span class="scheme" ng-if="subject_term.source" ng-bind="subject_term.source">
@@ -32,11 +30,11 @@
           </div>
 
         </div>
-      </div>
+      
     </div>
   </div>
 
-  <div ng-if="vm.record.metadata.inspire_categories" class="row add-control">
+  <div class="row add-control" ng-if="vm.record._workflow.data_type !== 'authors'">
     <form ng-submit="$event.preventDefault()">
       <div class="col-md-9 col-sm-9 col-xs-9">
         <input autocomplete id="new_subject_area"

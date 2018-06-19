@@ -295,6 +295,7 @@
 
           addSubjectArea: function () {
             function _subjectAlreadyPresent(subject) {
+              $scope.vm.record.metadata.inspire_categories = $scope.vm.record.metadata.inspire_categories || [];
               for (var i = 0; i < $scope.vm.record.metadata.inspire_categories.length; i++) {
                 if ($scope.vm.record.metadata.inspire_categories[i].term === subject) {
                   return true;
