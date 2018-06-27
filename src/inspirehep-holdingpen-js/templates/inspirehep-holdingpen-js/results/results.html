@@ -83,7 +83,7 @@
 
           <!--HEP Decision-->
           <div ng-if="!record._source.metadata.inspire_categories.length && !record._source.metadata.arxiv_categories.length">
-            At least one subject is required
+            Subject field is required
           </div>
           <div
             ng-if="record._source._workflow.data_type === 'hep' && !record._source._extra_data.user_action && 
