@@ -1,7 +1,7 @@
-<div ng-if="!vm.record.metadata.inspire_categories.length && !vm.record.metadata.arxiv_categories.length">
+<div ng-if="!vm.record.metadata.inspire_categories.length && vm.record._workflow.data_type !== 'authors'">
     Subject field is required
 </div>
-<div ng-if="vm.record.metadata.inspire_categories.length > 0 || vm.record.metadata.arxiv_categories.length > 0">
+<div ng-if="vm.record.metadata.inspire_categories.length > 0">
   <p class="automatic-decision">Automatic Decision: <span
     ng-class="{'accept_core': vm.record._extra_data.relevance_prediction.decision == 'CORE',
                 'accept': vm.record._extra_data.relevance_prediction.decision == 'Non-CORE',

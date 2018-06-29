@@ -82,12 +82,11 @@
         <div class="col-md-3">
 
           <!--HEP Decision-->
-          <div ng-if="!record._source.metadata.inspire_categories.length && !record._source.metadata.arxiv_categories.length">
+          <div ng-if="!record._source.metadata.inspire_categories.length && record._source._workflow.data_type !== 'authors'">
             Subject field is required
           </div>
           <div
-            ng-if="record._source._workflow.data_type === 'hep' && !record._source._extra_data.user_action && 
-            (record._source.metadata.inspire_categories.length > 0 || record._source.metadata.arxiv_categories.length > 0)">
+            ng-if="record._source._workflow.data_type === 'hep' && !record._source._extra_data.user_action && record._source.metadata.inspire_categories.length > 0">
             <div ng-if="record._source._extra_data.relevance_prediction.decision" class="automatic-decision">
               <p class="small-text">Automatic Decision:
                 <span ng-class="{'accept_core': record._source._extra_data.relevance_prediction.decision == 'CORE',
