@@ -48,14 +48,14 @@
         <div class="col-md-4"
              ng-if="record._source._workflow.data_type !== 'authors'">
           <holding-pen-template-handler
-            template="/static/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/results/results_details_hep.html">
+            template="/oldui/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/results/results_details_hep.html">
           </holding-pen-template-handler>
         </div>
 
         <div class="col-md-4"
              ng-if="record._source._workflow.data_type === 'authors'">
           <holding-pen-template-handler
-            template="/static/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/results/results_details_authors.html">
+            template="/oldui/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/results/results_details_authors.html">
           </holding-pen-template-handler>
         </div>
 
@@ -98,7 +98,7 @@
                   ng-bind="(record._source._extra_data.relevance_prediction.max_score | number : 2)"></span>
                 </span>
               </p>
-            </div> 
+            </div>
 
             <div ng-if="record._source._workflow.data_type === 'hep' && hasConflicts(record)">
               <a class="btn btn-warning"
@@ -168,7 +168,7 @@
 
           <div ng-if="record._source._workflow.status === 'ERROR'">
             <a ng-if="hasValidationErrors(record)" class="btn btn-danger btn-resolve-errors"
-              href="/editor/holdingpen/{{record._id}}">Resolve Errors	
+              href="/editor/holdingpen/{{record._id}}">Resolve Errors
             </a>
             <p class="red-color">
             <i class="fa fa-exclamation-triangle icon-large"></i> Error</p>
@@ -228,7 +228,7 @@
                           <i class="fa fa-external-link" aria-hidden="true"></i>
                         </a>
                     </div>
-                    
+
                     <div class="panel-body">
                       <div ng-if="match.authors" class="authors">
                         <span ng-repeat="author in match.authors">{{author.full_name}} <span ng-if="!$last"> ; </span> </span>
@@ -244,7 +244,7 @@
                               {{pub_info.journal_title}}
                               <span ng-if="pub_info.journal_volume"> {{pub_info.journal_volume}}</span>
                               <span ng-if="pub_info.year"> ({{pub_info.year}})</span>
-                              <span ng-if="pub_info.journal_issue"> {{pub_info.journal_issue}}</span>  
+                              <span ng-if="pub_info.journal_issue"> {{pub_info.journal_issue}}</span>
                               <span ng-if="pub_info.page_start && pub_info.page_end">
                                 {{pub_info.page_start}}
                                 <span ng-if="pub_info.page_end">-{{pub_info.page_end}}</span>
@@ -272,7 +272,7 @@
                           </ul>
                         </dd>
                       </dl>
-                        
+
                       <div ng-init="showAbstract=false" ng-if="match.abstract">
                         <a href="" ng-click='showAbstract=!showAbstract'>{{ showAbstract ? 'Hide abstract' : 'Show abstract'}}</a>
                         <p ng-if="showAbstract">{{match.abstract}}</p>

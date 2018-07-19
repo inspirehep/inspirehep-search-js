@@ -45,7 +45,7 @@
             $scope.operation = operation;
 
             $scope.modal = $uibModal.open({
-              templateUrl: '/static/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/modals/batch_' +
+              templateUrl: '/oldui/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/modals/batch_' +
                 operation + '_modal.html'
             });
           },
@@ -116,7 +116,7 @@
         $scope.vm.reasons = [];
         $scope.modal = undefined;
         $scope.vm.selectedBestMatch = null;
-        
+
         $scope.vm.inspire_categories = [
           'Accelerators',
           'Astrophysics',
@@ -203,7 +203,7 @@
             content: `Dear ${record.acquisition_source.email},
 
             Thanks for suggesting "${record.titles[0].title}".
-            
+
             We regret to inform you that we cannot include it in our database as it is outside the focus of INSPIRE.
             For details please check our collection policy at: https://inspirehep.net/info/hep/collection-policy.
             Thanks again for collaborating with INSPIRE! We are looking forward to further suggestions you might have.`
@@ -240,14 +240,14 @@
 
           setRejectionReason: function () {
             $scope.modal = $uibModal.open({
-              templateUrl: '/static/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/modals/rejection_reason_modal.html',
+              templateUrl: '/oldui/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/modals/rejection_reason_modal.html',
               scope: $scope
             });
           },
 
           showRejectionReason: function () {
             $scope.modal = $uibModal.open({
-              templateUrl: '/static/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/modals/generic_info_modal.html',
+              templateUrl: '/oldui/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/modals/generic_info_modal.html',
               scope: angular.extend($scope,
                 {
                   modalTitle: 'Reason for rejection',
@@ -283,7 +283,7 @@
                 $scope.matchDecisionMade = true;
             });
           },
-          
+
           redirect: function (url) {
             $window.location = url;
           },
