@@ -1,6 +1,3 @@
-<div ng-if="!vm.record.metadata.inspire_categories.length && vm.record._workflow.data_type !== 'authors'">
-    Subject field is required
-</div>
 <div ng-if="vm.record.metadata.inspire_categories.length > 0">
   <p class="automatic-decision">Automatic Decision: <span
     ng-class="{'accept_core': vm.record._extra_data.relevance_prediction.decision == 'CORE',
@@ -8,36 +5,41 @@
                 'reject': vm.record._extra_data.relevance_prediction.decision == 'Rejected'}"
     ng-bind="vm.record._extra_data.relevance_prediction.decision + ' ' + (vm.record._extra_data.relevance_prediction.max_score | number : 2)"></span>
   </p>
-
-  <div
-    ng-if="vm.record._extra_data._action == 'hep_approval' && vm.record._workflow.status === 'HALTED' && !Utils.hasConflicts(record)">
+</div>
+<div
+  ng-if="vm.record._extra_data._action == 'hep_approval' && vm.record._workflow.status === 'HALTED' && !Utils.hasConflicts(record)">
+  <div class="decision-buttons-container" ng-if="vm.record.metadata.inspire_categories.length">
     <button class="btn btn-success"
-            ng-click="Utils.setDecision('accept_core')">Core
+      ng-click="Utils.setDecision('accept_core')">Core
     </button>
     <button class="btn btn-warning"
-            ng-click="Utils.setDecision('accept')">Accept
-    </button>
-    <button ng-if="vm.record.metadata.acquisition_source.method == 'submitter' && vm.record._extra_data.journal_coverage == 'full'"
-            class="btn btn-danger-weak"
-            ng-click="Utils.setRejectionReason()"
-            uib-tooltip="The article belongs to a fully taken journal">Reject
-    </button>
-      <button ng-if="vm.record.metadata.acquisition_source.method == 'submitter'
-                    && (!vm.record._extra_data.journal_coverage || vm.record._extra_data.journal_coverage == 'partial')"
-              class="btn btn-danger"
-              ng-click="Utils.setRejectionReason()">Reject
-    </button>
-      <button ng-if="vm.record.metadata.acquisition_source.method == 'hepcrawl' && vm.record._extra_data.journal_coverage == 'full'"
-            class="btn btn-danger-weak"
-            ng-click="Utils.setDecision('reject')"
-            uib-tooltip="The article belongs to a fully taken journal">Reject
-    </button>
-    <button ng-if="vm.record.metadata.acquisition_source.method == 'hepcrawl'
-                  && (!vm.record._extra_data.journal_coverage || vm.record._extra_data.journal_coverage == 'partial')"
-            class="btn btn-danger"
-            ng-click="Utils.setDecision('reject')">Reject
+      ng-click="Utils.setDecision('accept')">Accept
     </button>
   </div>
+  <div ng-if="!vm.record.metadata.inspire_categories.length">
+      <p>Subject field is required</p>
+  </div>
+  <button ng-if="vm.record.metadata.acquisition_source.method == 'submitter' && vm.record._extra_data.journal_coverage == 'full'"
+          class="btn btn-danger-weak"
+          ng-click="Utils.setRejectionReason()"
+          uib-tooltip="The article belongs to a fully taken journal">Reject
+  </button>
+    <button ng-if="vm.record.metadata.acquisition_source.method == 'submitter'
+                  && (!vm.record._extra_data.journal_coverage || vm.record._extra_data.journal_coverage == 'partial')"
+            class="btn btn-danger"
+            ng-click="Utils.setRejectionReason()">Reject
+  </button>
+    <button ng-if="vm.record.metadata.acquisition_source.method == 'hepcrawl' && vm.record._extra_data.journal_coverage == 'full'"
+          class="btn btn-danger-weak"
+          ng-click="Utils.setDecision('reject')"
+          uib-tooltip="The article belongs to a fully taken journal">Reject
+  </button>
+  <button ng-if="vm.record.metadata.acquisition_source.method == 'hepcrawl'
+                && (!vm.record._extra_data.journal_coverage || vm.record._extra_data.journal_coverage == 'partial')"
+          class="btn btn-danger"
+          ng-click="Utils.setDecision('reject')">Reject
+  </button>
+</div>
 
   <div ng-if="vm.record._extra_data._action == null || vm.ingestion_complete"
     class="text-muted">
@@ -57,27 +59,24 @@
       matched</p>
   </div>
 
-  <div class="decision-keywords">
+<div class="decision-keywords">
+  <p>
     <p>
-      <p>
-        {{Utils.keys(vm.record._extra_data.classifier_results.complete_output['core_keywords']).length}} core keywords from {{vm.record._extra_data.classifier_results.fulltext_used ?'fulltext' : 'metadata'}}.
-      </p>
-      <p ng-init="filteredKeywordCount = Utils.keys(vm.record._extra_data.classifier_results.complete_output['filtered_core_keywords']).length">
-        {{filteredKeywordCount}} Filtered{{filteredKeywordCount > 0 ? ' :' : ''}}
-      </p>
+      {{Utils.keys(vm.record._extra_data.classifier_results.complete_output['core_keywords']).length}} core keywords from {{vm.record._extra_data.classifier_results.fulltext_used ?'fulltext' : 'metadata'}}.
     </p>
-    <div class="list">
-      <div class="row"
-          ng-repeat="keyword in vm.record._extra_data.classifier_results.complete_output['filtered_core_keywords']">
-        <div class="col-md-9 col-sm-9 text-left"
-            ng-bind="keyword['keyword']"></div>
-        <div class="col-md-3 col-sm-3 text-right"><span
-          class="label label-success"
-          ng-bind="keyword['number']"></span>
-        </div>
+    <p ng-init="filteredKeywordCount = Utils.keys(vm.record._extra_data.classifier_results.complete_output['filtered_core_keywords']).length">
+      {{filteredKeywordCount}} Filtered{{filteredKeywordCount > 0 ? ' :' : ''}}
+    </p>
+  </p>
+  <div class="list">
+    <div class="row"
+        ng-repeat="keyword in vm.record._extra_data.classifier_results.complete_output['filtered_core_keywords']">
+      <div class="col-md-9 col-sm-9 text-left"
+          ng-bind="keyword['keyword']"></div>
+      <div class="col-md-3 col-sm-3 text-right"><span
+        class="label label-success"
+        ng-bind="keyword['number']"></span>
       </div>
-      </p>
     </div>
-    </p>
   </div>
 </div>

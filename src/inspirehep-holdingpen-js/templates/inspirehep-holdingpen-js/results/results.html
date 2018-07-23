@@ -82,11 +82,9 @@
         <div class="col-md-3">
 
           <!--HEP Decision-->
-          <div ng-if="!record._source.metadata.inspire_categories.length && record._source._workflow.data_type !== 'authors'">
-            Subject field is required
-          </div>
           <div
-            ng-if="record._source._workflow.data_type === 'hep' && !record._source._extra_data.user_action && record._source.metadata.inspire_categories.length > 0">
+            ng-if="record._source._workflow.data_type === 'hep' && !record._source._extra_data.user_action">
+            
             <div ng-if="record._source._extra_data.relevance_prediction.decision" class="automatic-decision">
               <p class="small-text">Automatic Decision:
                 <span ng-class="{'accept_core': record._source._extra_data.relevance_prediction.decision == 'CORE',
@@ -108,19 +106,23 @@
 
             <div
               ng-if="record._source._workflow.data_type === 'hep' && !record._source.wo.user_action && record._source._workflow.status === 'HALTED' && record._source._extra_data._action === 'hep_approval' && !hasConflicts(record)">
-                <button class="btn btn-success"
+                <div class="decision-buttons-container" ng-if="record._source.metadata.inspire_categories.length">
+                    <button class="btn btn-success"
                         ng-click="setDecision(record._id,'accept_core')">Core
-                </button>
-                <button class="btn btn-warning"
-                        ng-click="setDecision(record._id,'accept')">Accept
-                </button>
-
+                    </button>
+                    <button class="btn btn-warning"
+                            ng-click="setDecision(record._id,'accept')">Accept
+                    </button>
+                  </div>
+                <div ng-if="!record._source.metadata.inspire_categories.length">
+                    <p>Subject field is required</p>
+                </div>
                 <button ng-if="record._source.metadata.acquisition_source.method == 'hepcrawl' && record._source._extra_data.journal_coverage == 'full'"
                         class="btn btn-danger-weak"
                         ng-click="redirect('/holdingpen/' + record._id)"
                         uib-tooltip="The article belongs to a fully taken journal">Reject
                 </button>
-                  <button ng-if="record._source.metadata.acquisition_source.method == 'hepcrawl'
+                <button ng-if="record._source.metadata.acquisition_source.method == 'hepcrawl'
                                  && (!record._source._extra_data.journal_coverage || record._source._extra_data.journal_coverage == 'partial')"
                         class="btn btn-danger"
                         ng-click="redirect('/holdingpen/' + record._id)">Reject
@@ -130,7 +132,7 @@
                         ng-click="redirect('/holdingpen/' + record._id)"
                         uib-tooltip="The article belongs to a fully taken journal">Reject
                 </button>
-                  <button ng-if="record._source.metadata.acquisition_source.method == 'submitter'
+                <button ng-if="record._source.metadata.acquisition_source.method == 'submitter'
                                  && (!record._source._extra_data.journal_coverage || record._source._extra_data.journal_coverage == 'partial')"
                         class="btn btn-danger"
                         ng-click="redirect('/holdingpen/' + record._id)">Reject
