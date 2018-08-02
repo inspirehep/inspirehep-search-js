@@ -33,23 +33,30 @@
 
             getRecord: function (vm, workflowId) {
               var service = this;
-              $http.get('/api/holdingpen/' + workflowId).then(function (response) {
-                vm.record = response.data;
-                if (vm.record._workflow.data_type === 'authors') {
-                  $('#breadcrumb').html(vm.record.metadata.name.value);
-                } else {
-                  var title;
-                  if (service.hasCrawlErrors(vm.record)) {
-                    title = vm.record._extra_data.crawl_errors.file_name;
-                  } else {
-                    title = vm.record.metadata.titles[0].title;
+              $http({
+                  url: '/api/holdingpen/' + workflowId,
+                  method: 'GET',
+                  headers: {
+                      'Cache-Control': 'no-cache, no-store, must-revalidate',
+                      'Pragma': 'no-cache',
+                      'Expires': 0
+                  }}).then(function (response) {
+                      vm.record = response.data;
+                      if (vm.record._workflow.data_type === 'authors') {
+                      $('#breadcrumb').html(vm.record.metadata.name.value);
+                      } else {
+                      var title;
+                      if (service.hasCrawlErrors(vm.record)) {
+                          title = vm.record._extra_data.crawl_errors.file_name;
+                    } else {
+                      title = vm.record.metadata.titles[0].title;
+                    }
+                    $('#breadcrumb').html(title > 70 ? title.substring(0, 70) + '...' : title);
                   }
-                  $('#breadcrumb').html(title > 70 ? title.substring(0, 70) + '...' : title);
-                }
-              }).catch(function (value) {
-                vm.ingestion_complete = false;
-                console.error(value);
-              });
+                }).catch(function (value) {
+                  vm.ingestion_complete = false;
+                  console.error(value);
+                });
             },
 
             updateRecord: function (vm, workflowId) {
@@ -90,7 +97,7 @@
               });
             },
 
-            setMatchDecision: function(workflowId, match) {              
+            setMatchDecision: function(workflowId, match) {
               return $http.post('/api/holdingpen/' + workflowId + '/action/resolve', {match_recid: match});
             },
 
@@ -150,14 +157,12 @@
 
             hasValidationErrors: function (workflow) {
               if (!workflow) { return false; }
-    
               var _extra_data = workflow._extra_data;
               return _extra_data && _extra_data.validation_errors && _extra_data.validation_errors.length > 0;
             },
 
             hasCrawlErrors: function (workflow) {
               if (!workflow) { return false; }
-    
               var _extra_data = workflow._extra_data;
               return _extra_data && _extra_data.crawl_errors;
             },
