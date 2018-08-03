@@ -367,6 +367,10 @@
             HoldingPenRecordService.restartWorkflow($scope.vm, $scope.workflowId);
           },
 
+          restartWorkflowStep: function () {
+            HoldingPenRecordService.restartWorkflowStep($scope.vm, $scope.workflowId);
+          },
+
           hasValidationErrors: function () {
             var record = $scope.vm.record;
             return HoldingPenRecordService.hasValidationErrors(record);

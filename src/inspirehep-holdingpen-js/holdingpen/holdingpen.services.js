@@ -155,6 +155,14 @@
               });
             },
 
+            restartWorkflowStep: function (vm, workflowId) {
+              $http.post('/api/holdingpen/' + workflowId + '/action/restart_step').then(function (response) {
+                vm.workflow_flag = 'Workflow step restarted';
+              }).catch(function (value) {
+                vm.restarted = false;
+              });
+            },
+
             hasValidationErrors: function (workflow) {
               if (!workflow) { return false; }
               var _extra_data = workflow._extra_data;
