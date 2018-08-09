@@ -224,7 +224,7 @@
           <div ng-if="!matchDecisionMadeById[record._id]" ng-init="selectedBestMatchesById[record._id] = record._source._extra_data.matches.fuzzy[0].control_number">
                 <h5>MATCHES</h5>
                 <div class="matchingRecords panel-group" ng-repeat="match in record._source._extra_data.matches.fuzzy">
-                  <div class="panel panel-datatables">
+                  <div class="panel">
                     <div class="panel-heading">
                         <input id="radio-{{record._id}}-{{match.control_number}}" ng-model="selectedBestMatchesById[record._id]" name="possible-matches-{{record._id}}" type="radio" value="{{match.control_number}}">
                         <label for="radio-{{record._id}}-{{match.control_number}}" class="custom-control-description panel-title">
