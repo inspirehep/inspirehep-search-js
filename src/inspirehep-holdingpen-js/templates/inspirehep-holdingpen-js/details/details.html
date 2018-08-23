@@ -25,7 +25,31 @@
     </div>
 
 
-    <div class="alert" ng-if="vm.record._extra_data._action || vm.record._workflow.status === 'ERROR'" ng-class="{'alert-warning': vm.record._workflow.status === 'HALTED' && !vm.ingestion_complete,
+    <div class="alert alert-danger" 
+        role="alert"
+        ng-if="vm.record._extra_data._action === 'resolve_multiple_exact_matches'">
+      <div class="row">
+        <div class="col-md-8 text-left">
+          <i class="fa fa-exclamation-triangle"></i> <strong>Duplicate IDs: </strong>
+          <span ng-repeat="exact_match_id in vm.record._extra_data.matches.exact">
+            <a class="white-link" ng-href="https://inspirehep.net/record/{{exact_match_id}}">{{exact_match_id}}</a>
+          </span>
+          <p>Resolve them in 
+            <a ng-href="https://inspirehep.net/record/merge/#recid1={{vm.record._extra_data.matches.exact[0]}}&recid2={{vm.record._extra_data.matches.exact[1]}}"
+                target="_blank"
+                class="white-link">BibMerge</a>
+          </p>
+        </div>
+        <div class="col-md-4">
+          When you resolve this error, click to continue <br>
+          <button class="btn btn-default" ng-click="Utils.restartWorkflow()">
+            <i class="fa fa-refresh" aria-hidden="true"></i> Restart workflow
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert" ng-if="(vm.record._extra_data._action && vm.record._extra_data._action !== 'resolve_multiple_exact_matches') || vm.record._workflow.status === 'ERROR'" ng-class="{'alert-warning': vm.record._workflow.status === 'HALTED' && !vm.ingestion_complete,
          'alert-danger': vm.record._workflow.status === 'ERROR' && !vm.ingestion_complete,
          'alert-success': vm.record._workflow.status === 'COMPLETED' || vm.ingestion_complete,
          'alert-info': vm.record._workflow.status === 'WAITING'}">
