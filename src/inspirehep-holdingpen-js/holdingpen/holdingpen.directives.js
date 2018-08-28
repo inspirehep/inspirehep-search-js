@@ -381,6 +381,11 @@
             return HoldingPenRecordService.hasConflicts(record);
           },
 
+          getLinkToDuplicateDois: function() {
+            var record = $scope.vm.record;
+            return HoldingPenRecordService.getLinkToDuplicateDois(record);
+          },
+
           hasCrawlErrors: function () {
             var record = $scope.vm.record;
             return HoldingPenRecordService.hasCrawlErrors(record);

@@ -217,17 +217,20 @@
       </div>
       <div class="alert alert-danger" 
       role="alert"
-      ng-if="record._source._extra_data._action === 'resolve_multiple_exact_matches'">
+      ng-if="record._source._extra_data._action === 'resolve_multiple_exact_matches'"
+      ng-init="linkToDuplicateDois = getLinkToDuplicateDois(record)">
         <div class="row">
           <div class="col-md-8 text-left">
             <i class="fa fa-exclamation-triangle"></i> <strong>Duplicate IDs: </strong>
-            <span ng-repeat="exact_match_id in record._source._extra_data.matches.exact">
-              <a class="white-link" ng-href="https://inspirehep.net/record/{{exact_match_id}}">{{exact_match_id}}</a>
-            </span>
-            <p>Resolve them in 
+            <a class="white-link" ng-href="{{linkToDuplicateDois}}">
+              <span ng-repeat="exact_match_id in record._source._extra_data.matches.exact">
+                {{exact_match_id}} <span ng-if="!$last"> or </span> 
+              </span>
+            </a>
+            <p>Resolve them in
               <a ng-href="https://inspirehep.net/record/merge/#recid1={{record._source._extra_data.matches.exact[0]}}&recid2={{record._source._extra_data.matches.exact[1]}}"
                   target="_blank"
-                  class="white-link">BibMerge</a>
+                  class="white-link">BibMerge</a> 
             </p>
           </div>
           <div class="col-md-4">
