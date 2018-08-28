@@ -163,6 +163,19 @@
               });
             },
 
+            getLinkToDuplicateDois: function(workflow) {
+              var link = 'http://inspirehep.net/search?p=';
+              var totalExactMatches = workflow._extra_data.matches.exact.length;
+              for(var exactMatch = 0; exactMatch < totalExactMatches; exactMatch++) {
+                if(exactMatch !== totalExactMatches - 1) {
+                  link = link + 'recid:' + workflow._extra_data.matches.exact[exactMatch] + '+or+';
+                } else {
+                  link = link + 'recid:' + workflow._extra_data.matches.exact[exactMatch];
+                }
+              }
+              return link;
+            },
+
             hasValidationErrors: function (workflow) {
               if (!workflow) { return false; }
               var _extra_data = workflow._extra_data;

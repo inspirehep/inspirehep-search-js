@@ -39,6 +39,7 @@
     $scope.hasConflicts = hasConflicts;
     $scope.hasValidationErrors = hasValidationErrors;
     $scope.hasCrawlErrors = hasCrawlErrors;
+    $scope.getLinkToDuplicateDois = getLinkToDuplicateDois;
     function _add_record_method(record) {
       var method = record._source.metadata.acquisition_source.method;
       if (method in $scope.vm.selected_record_methods) {
@@ -103,6 +104,9 @@
 
     function hasConflicts(record) {
       return HoldingPenRecordService.hasConflicts(record._source);
+    }
+    function getLinkToDuplicateDois(record) {
+      return HoldingPenRecordService.getLinkToDuplicateDois(record._source);
     }
     function hasValidationErrors(record) {
       return HoldingPenRecordService.hasValidationErrors(record._source);
