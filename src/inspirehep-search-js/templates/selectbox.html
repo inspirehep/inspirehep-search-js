@@ -1,5 +1,6 @@
-<select name="select-{{ data.sortParameter }}" class="form-control" ng-model="data.selectedOption" ng-change="handleFieldChange()">
-  <option ng-repeat="option in data.availableOptions.options"
-   value="{{ option.value }}"
-   ng-selected="isSelected(option.value)">{{ option.title }}</option>
+<select name="select-{{ data.sortParameter }}" 
+		class="form-control" 
+		ng-options="option.value as option.title for option in data.availableOptions.options track by option.value"
+		ng-model="data.selectedOption"
+		ng-change="handleFieldChange()">
 </select>
