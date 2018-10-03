@@ -11,9 +11,9 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-if="position.institution" ng-repeat="position in vm.record.metadata.positions">
-      <td><div ng-bind="position.institution.name"></div></td>
-      <td><div ng-bind="position._rank"></div></td>
+    <tr ng-if="position" ng-repeat="position in vm.record.metadata.positions">
+      <td><div ng-bind="position.institution"></div></td>
+      <td><div ng-bind="position.rank"></div></td>
       <td><div ng-bind="position.start_date"></div></td>
       <td><div ng-bind="position.end_date"></div></td>
       <td><div ng-bind="position.current"></div></td>
