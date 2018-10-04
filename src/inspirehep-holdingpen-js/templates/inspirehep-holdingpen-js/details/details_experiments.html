@@ -1,5 +1,5 @@
 <div class="detail-panel" id="hp-panel-experiments">
-  <h4>Project membership History</h4>
+  <h4>Project Membership History</h4>
   <table class="table table-striped">
   <thead>
     <tr>
@@ -12,8 +12,8 @@
   <tbody>
     <tr ng-repeat="project_membership in vm.record.metadata.project_membership">
       <td><div ng-bind="project_membership.name"></div></td>
-      <td><div ng-bind="project_membership.start_year"></div></td>
-      <td><div ng-bind="project_membership.end_year"></div></td>
+      <td><div ng-bind="project_membership.start_date"></div></td>
+      <td><div ng-bind="project_membership.end_date"></div></td>
       <td><div ng-bind="project_membership.current"></div></td>
     </tr>
   </tbody>
