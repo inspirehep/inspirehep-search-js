@@ -97,6 +97,40 @@
               });
             },
 
+            setCore: function(vm, workflowId) {
+              $http.post('/api/holdingpen/' + workflowId + '/core-selection/continue').then(function (response) {
+                vm.ingestion_complete = true;
+                var record = vm.record;
+                if (!record) {
+                  record = vm;
+                }
+
+                if(!record._extra_data) {
+                  record._extra_data = {};
+                }
+
+              }).catch(function (value) {
+                vm.error = value;
+              });
+            },
+
+            setAccept: function(vm, workflowId) {
+              $http.post('/api/holdingpen/' + workflowId + '/core-selection/complete').then(function (response) {
+                vm.ingestion_complete = true;
+                var record = vm.record;
+                if (!record) {
+                  record = vm;
+                }
+
+                if(!record._extra_data) {
+                  record._extra_data = {};
+                }
+
+              }).catch(function (value) {
+                vm.error = value;
+              });
+            },
+
             setMatchDecision: function(workflowId, match) {
               return $http.post('/api/holdingpen/' + workflowId + '/action/resolve', {match_recid: match});
             },
