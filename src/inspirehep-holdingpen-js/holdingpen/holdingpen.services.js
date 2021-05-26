@@ -98,7 +98,7 @@
             },
 
             setCore: function(vm, workflowId) {
-              $http.post('/api/holdingpen/' + workflowId + '/core-selection/continue').then(function (response) {
+              $http.post('/api/workflows/' + workflowId + '/core-selection/continue').then(function (response) {
                 vm.ingestion_complete = true;
                 var record = vm.record;
                 if (!record) {
@@ -115,7 +115,7 @@
             },
 
             setAccept: function(vm, workflowId) {
-              $http.post('/api/holdingpen/' + workflowId + '/core-selection/complete').then(function (response) {
+              $http.post('/api/workflows/' + workflowId + '/core-selection/complete').then(function (response) {
                 vm.ingestion_complete = true;
                 var record = vm.record;
                 if (!record) {
