@@ -20,6 +20,7 @@
  * waive the privileges and immunities granted to it by virtue of its status
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
  */
+/* jshint ignore:start */
 (function (angular) {
   function HoldingPenSelectionCtrl($scope, Hotkeys, HoldingPenRecordService, $window) {
     $scope.vm.selected_records = [];
@@ -177,3 +178,4 @@
   ];
   angular.module('holdingpen.controllers', []).controller('HoldingPenSelectionCtrl', HoldingPenSelectionCtrl);
 }(angular));
+/* jshint ignore:end */
