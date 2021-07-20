@@ -229,7 +229,7 @@
       </div>
       <div class="alert alert-danger"
       role="alert"
-      ng-if="record._source._extra_data._action === 'resolve_multiple_exact_matches'"
+      ng-if="record._source._extra_data._action === 'resolve_multiple_exact_matches' && vm.record._workflow.status !== 'COMPLETED'"
       ng-init="linkToDuplicateDois = getLinkToDuplicateDois(record)">
         <div class="row">
           <div class="col-md-8 text-left">

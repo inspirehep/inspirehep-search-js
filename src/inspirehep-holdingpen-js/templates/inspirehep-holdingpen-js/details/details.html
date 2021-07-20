@@ -25,9 +25,9 @@
     </div>
 
 
-    <div class="alert alert-danger" 
+    <div class="alert alert-danger"
         role="alert"
-        ng-if="vm.record._extra_data._action === 'resolve_multiple_exact_matches'"
+        ng-if="vm.record._extra_data._action === 'resolve_multiple_exact_matches' && vm.record._workflow.status !== 'COMPLETED"
         ng-init="linkToDuplicateDois = Utils.getLinkToDuplicateDois()">
       <div class="row">
         <div class="col-md-8 text-left">
@@ -37,7 +37,7 @@
               {{exact_match_id}}<span ng-if="!$last"> or </span>
             </span>
           </a>
-          <p>Resolve them in 
+          <p>Resolve them in
             <a ng-href="https://inspirehep.net/record/merge/#recid1={{vm.record._extra_data.matches.exact[0]}}&recid2={{vm.record._extra_data.matches.exact[1]}}"
                 target="_blank"
                 class="white-link">BibMerge</a>
