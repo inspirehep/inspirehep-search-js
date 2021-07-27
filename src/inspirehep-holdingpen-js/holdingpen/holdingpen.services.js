@@ -114,6 +114,26 @@
               });
             },
 
+            setBatchCore: function(records, selected_records_ids) {
+              for (var record_idx in selected_record_ids) {
+                $http.post('/api/workflows/' + record_idx + '/core-selection/continue').then(function (response) {
+                  vm.ingestion_complete = true;
+                  var record = vm.record;
+                  if (!record) {
+                    record = vm;
+                  }
+
+                  if(!record._extra_data) {
+                    record._extra_data = {};
+                  }
+
+                }).catch(function (value) {
+                  vm.error = value;
+                });
+              }
+              selected_record_ids = [];
+            },
+
             setAccept: function(vm, workflowId) {
               $http.post('/api/workflows/' + workflowId + '/core-selection/complete').then(function (response) {
                 vm.ingestion_complete = true;
@@ -129,6 +149,26 @@
               }).catch(function (value) {
                 vm.error = value;
               });
+            },
+
+            setBatchAccept: function(records, selected_records_ids) {
+              for (var record_idx in selected_record_ids) {
+                $http.post('/api/workflows/' + record_idx + '/core-selection/complete').then(function (response) {
+                  vm.ingestion_complete = true;
+                  var record = vm.record;
+                  if (!record) {
+                    record = vm;
+                  }
+
+                  if(!record._extra_data) {
+                    record._extra_data = {};
+                  }
+
+                }).catch(function (value) {
+                  vm.error = value;
+                });
+              }
+              selected_record_ids = [];
             },
 
             setMatchDecision: function(workflowId, match) {
