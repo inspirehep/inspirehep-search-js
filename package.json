@@ -11,7 +11,7 @@
     "url": "git+https://github.com/inspirehep/inspirehep-search-js.git"
   },
   "dependencies": {
-    "angular": "=1.4.8",
+    "angular": "=1.8.0",
     "angular-sanitize": "=1.4.8",
     "angular-mocks": "=1.4.8",
     "angular-scenario": "=1.4.8",
