@@ -135,6 +135,7 @@
           'Accelerators',
           'Astrophysics',
           'Computing',
+          'Condensed Matter',
           'Data Analysis and Statistics',
           'Experiment-HEP',
           'Experiment-Nucl',
@@ -145,6 +146,7 @@
           'Math and Math Physics',
           'Other',
           'Phenomenology-HEP',
+          'Quantum Physics',
           'Theory-HEP',
           'Theory-Nucl'
         ];
@@ -154,14 +156,17 @@
           'b': 'Accelerators',
           'c': 'Computing',
           'e': 'Experiment-HEP',
+          'f': 'Condensed Matter',
           'g': 'Gravitation and Cosmology',
           'i': 'Instrumentation',
+          'k': 'Quantum Physics',
           'l': 'Lattice',
           'm': 'Math and Math Physics',
           'n': 'Theory-Nucl',
           'o': 'Other',
           'p': 'Phenomenology-HEP',
           'q': 'General Physics',
+          's': 'Data Analysis and Statistics',
           't': 'Theory-HEP',
           'x': 'Experiment-Nucl',
         };
