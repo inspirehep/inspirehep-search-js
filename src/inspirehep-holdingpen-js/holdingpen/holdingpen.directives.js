@@ -40,20 +40,6 @@
             $scope.modal.dismiss('cancel');
           },
 
-          setBatchCore: function(){
-            HoldingPenRecordService.setBatchCore(
-              $scope.vm.invenioSearchResults.hits.hits,
-              $scope.vm.selected_record_decisions['hep']
-            );
-          },
-
-          setBatchAccept: function() {
-            HoldingPenRecordService.setBatchAccept(
-              $scope.vm.invenioSearchResults.hits.hits,
-                $scope.vm.selected_record_decisions['hep']
-            );
-          },
-
           showConfirm: function (data_type, operation) {
             $scope.data_type = data_type;
             $scope.operation = operation;
