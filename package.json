@@ -1,6 +1,6 @@
 {
   "name": "inspirehep-search-js",
-  "version": "2.0.60",
+  "version": "2.0.62",
   "description": "Javascript search components for Inspirehep-Search",
   "author": {
     "name": "INSPIREHEP",
@@ -79,5 +79,8 @@
   "bugs": {
     "url": "https://github.com/inspirehep/inspirehep-search-js/issues"
   },
-  "homepage": "https://github.com/inspirehep/inspirehep-search-js#readme"
+  "homepage": "https://github.com/inspirehep/inspirehep-search-js#readme",
+  "files": [
+    "dist/**/*.js", "dist/*.js"
+  ]
 }
