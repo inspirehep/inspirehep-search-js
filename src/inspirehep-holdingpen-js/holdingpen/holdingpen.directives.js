@@ -210,7 +210,7 @@
             Thanks for suggesting "${record.titles[0].title}".
 
             We regret to inform you that we cannot include it in our database as it is outside the focus of INSPIRE.
-            For details please check our collection policy at: https://inspirehep.net/info/hep/collection-policy.
+            For details please check our collection policy at: https://help.inspirehep.net/knowledge-base/content-policy/.
             Thanks again for collaborating with INSPIRE! We are looking forward to further suggestions you might have.`
           },
           {
