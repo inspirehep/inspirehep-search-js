@@ -45,6 +45,7 @@
               $scope.vm.invenioSearchResults.hits.hits,
               $scope.vm.selected_record_decisions['hep'],
             )
+            $scope.modal.dismiss('cancel');
           },
 
           setBatchAccept: function() {
@@ -52,6 +53,7 @@
               $scope.vm.invenioSearchResults.hits.hits,
                 $scope.vm.selected_record_decisions['hep'],
             )
+            $scope.modal.dismiss('cancel');
           },
 
           showConfirm: function (data_type, operation) {
