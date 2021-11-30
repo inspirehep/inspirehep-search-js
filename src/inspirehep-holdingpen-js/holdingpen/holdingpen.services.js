@@ -162,7 +162,7 @@
               selected_record_ids = [];
             },
 
-            setBatchCore: function(records, selected_records_ids) {
+            setBatchCore: function(records, selected_record_ids) {
               for (var record_idx in selected_record_ids) {
                 $http.post('/api/workflows/' + record_idx + '/core-selection/continue').then(function (response) {
                   vm.ingestion_complete = true;
@@ -182,7 +182,7 @@
               selected_record_ids = [];
             },
 
-            setBatchAccept: function(records, selected_records_ids) {
+            setBatchAccept: function(records, selected_record_ids) {
               for (var record_idx in selected_record_ids) {
                 $http.post('/api/workflows/' + record_idx + '/core-selection/complete').then(function (response) {
                   vm.ingestion_complete = true;
