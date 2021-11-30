@@ -164,19 +164,13 @@
 
             setBatchCore: function(records, selected_record_ids) {
               for (var record_idx in selected_record_ids) {
-                $http.post('/api/workflows/' + record_idx + '/core-selection/continue').then(function (response) {
-                  vm.ingestion_complete = true;
-                  var record = vm.record;
-                  if (!record) {
-                    record = vm;
+                var _id = selected_record_ids[record_idx];
+                $http.post('/api/workflows/' + _id + '/core-selection/continue').then(function (response) {
+                  var record_obj = records[record_idx]._source;
+                  if(!record_obj._extra_data) {
+                    record_obj._extra_data = {};
                   }
-
-                  if(!record._extra_data) {
-                    record._extra_data = {};
-                  }
-
-                }).catch(function (value) {
-                  vm.error = value;
+                  record_obj._workflow.status = 'WAITING';
                 });
               }
               selected_record_ids = [];
@@ -184,19 +178,13 @@
 
             setBatchAccept: function(records, selected_record_ids) {
               for (var record_idx in selected_record_ids) {
-                $http.post('/api/workflows/' + record_idx + '/core-selection/complete').then(function (response) {
-                  vm.ingestion_complete = true;
-                  var record = vm.record;
-                  if (!record) {
-                    record = vm;
+                var _id = selected_record_ids[record_idx];
+                $http.post('/api/workflows/' + _id + '/core-selection/complete').then(function (response) {
+                  var record_obj = records[record_idx]._source;
+                  if(!record_obj._extra_data) {
+                    record_obj._extra_data = {};
                   }
-
-                  if(!record._extra_data) {
-                    record._extra_data = {};
-                  }
-
-                }).catch(function (value) {
-                  vm.error = value;
+                  record_obj._workflow.status = 'WAITING';
                 });
               }
               selected_record_ids = [];
