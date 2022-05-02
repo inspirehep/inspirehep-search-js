@@ -2,8 +2,8 @@
   <h4>Errors</h4>
 
   <div class="error-data">
-    <pre ng-if="!Utils.hasCrawlErrors()" ng-bind="vm.record._extra_data._error_msg"></pre>
-    <pre ng-if="Utils.hasCrawlErrors()" ng-repeat="error in vm.record._extra_data.crawl_errors.errors" ng-bind="error.traceback">
+    <pre ng-if="!Utils.hasCrawlErrors()" ng-bind-html="vm.record._extra_data._error_msg | linky:'_blank'"></pre>
+    <pre ng-if="Utils.hasCrawlErrors()" ng-repeat="error in vm.record._extra_data.crawl_errors.errors" ng-bind-html="error.traceback | linky:'_blank'">
     </pre>
   </div>
 </div>

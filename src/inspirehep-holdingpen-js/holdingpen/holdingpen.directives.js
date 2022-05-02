@@ -43,16 +43,16 @@
           setBatchCore: function(){
             HoldingPenRecordService.setBatchCore(
               $scope.vm.invenioSearchResults.hits.hits,
-              $scope.vm.selected_record_decisions['hep'],
-            )
+              $scope.vm.selected_record_decisions['hep']
+            );
             $scope.modal.dismiss('cancel');
           },
 
           setBatchAccept: function() {
             HoldingPenRecordService.setBatchAccept(
               $scope.vm.invenioSearchResults.hits.hits,
-                $scope.vm.selected_record_decisions['hep'],
-            )
+                $scope.vm.selected_record_decisions['hep']
+            );
             $scope.modal.dismiss('cancel');
           },
 
