@@ -11,6 +11,16 @@ Installation
 ------------
 
     $ npm i
+    
+Release
+-------
+❗❗❗ **Release step in actions doesn't work** ❗❗❗
+
+1. Edit in `package.json` the `version`.
+2. `$ npm run-script postversion`
+3. `$ npm publish --access public`
+4. OPTIONAL: bump version in [inspire-next](https://github.com/inspirehep/inspire-next/blob/9cfc78e3b541650412bec1432c87f8a6648a12a2/inspirehep/modules/search/bundles.py#L37)
+
 
 Demo
 ----
@@ -32,6 +42,9 @@ Docs
     $ npm run-script docs
     $ # read
     $ open docs/index.html
+    
+   
+
 
 How to use?
 -----------
