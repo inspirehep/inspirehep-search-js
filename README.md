@@ -16,10 +16,11 @@ Release
 -------
 ❗❗❗ **Release step in actions doesn't work** ❗❗❗
 
-1. Edit in `package.json` the `version`.
-2. `$ npm run-script postversion`
-3. `$ npm publish --access public`
-4. OPTIONAL: bump version in [inspire-next](https://github.com/inspirehep/inspire-next/blob/9cfc78e3b541650412bec1432c87f8a6648a12a2/inspirehep/modules/search/bundles.py#L37)
+1. Setup your `token` with from the `inspirehep` npm account (passbolt)
+2. Edit in `package.json` the `version`.
+3. `$ npm run-script postversion`
+4. `$ npm publish --access public`
+5. OPTIONAL: bump version in [inspire-next](https://github.com/inspirehep/inspire-next/blob/9cfc78e3b541650412bec1432c87f8a6648a12a2/inspirehep/modules/search/bundles.py#L37)
 
 
 Demo
