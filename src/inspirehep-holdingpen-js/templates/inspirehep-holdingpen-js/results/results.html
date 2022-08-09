@@ -105,13 +105,13 @@
             </div>
 
             <div
-              ng-if="record._source._workflow.data_type === 'hep' && record._source._workflow.status === 'HALTED' && record._source._extra_data._action === 'auto_non_core_record' ">
+              ng-if="record._source._workflow.data_type === 'hep' && record._source._workflow.status === 'HALTED' && record._source._extra_data._action === 'core_selection_approval' ">
                 <div class="decision-buttons-container" ng-if="record._source.metadata.inspire_categories.length">
                     <button class="btn btn-success"
-                        ng-click="setCore(record._id)">Core
+                        ng-click="setDecision(record._id,'accept_core')">Core
                     </button>
                     <button class="btn btn-warning"
-                            ng-click="setAccept(record._id)">Accept
+                            ng-click="setDecision(record._id,'accept')">Accept
                     </button>
                   </div>
             </div>
