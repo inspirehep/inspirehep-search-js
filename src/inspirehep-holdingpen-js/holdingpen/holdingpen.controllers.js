@@ -34,8 +34,6 @@
     $scope.isChecked = isChecked;
     $scope.allChecked = allChecked;
     $scope.setDecision = setDecision;
-    $scope.setAccept = setAccept;
-    $scope.setCore = setCore;
     $scope.onBestMatchSelected = onBestMatchSelected;
     $scope.onNoMatchSelected = onNoMatchSelected;
     $scope.redirect = redirect;
@@ -87,14 +85,6 @@
     }
     function setDecision(id, decision) {
       HoldingPenRecordService.setBatchDecision($scope.vm.invenioSearchResults.hits.hits, [+id], decision);
-    }
-
-    function setAccept(id){
-      HoldingPenRecordService.setAccept($scope.vm.invenioSearchResults.hits.hits, id);
-    }
-
-    function setCore(id) {
-      HoldingPenRecordService.setCore($scope.vm.invenioSearchResults.hits.hits, id);
     }
 
     function onBestMatchSelected(workflowId){

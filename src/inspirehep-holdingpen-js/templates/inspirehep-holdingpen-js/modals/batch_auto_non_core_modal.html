@@ -6,7 +6,7 @@
 </div>
 <div class="modal-footer">
   <button ng-if="data_type == 'hep'" class="btn btn-success pull-right" type="button"
-          ng-click="BatchUtils.setBatchCore()">Core</button>
+          ng-click="BatchUtils.setDecision(data_type, 'accept_core')">Core</button>
 
   <button class="btn btn-default pull-left" type="button" ng-click="BatchUtils.hideConfirm()">Cancel
   </button>
