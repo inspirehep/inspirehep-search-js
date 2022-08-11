@@ -121,7 +121,7 @@
               <span ng-if="!vm.record.metadata.publication_info[0].journal_title && vm.record.metadata.publication_info[0].pubinfo_freetext">{{vm.record.metadata.publication_info[0].pubinfo_freetext}}</span>
             </div>
 
-            <p class="record-abstract" ng-bind-html="vm.record.metadata.abstracts[0].value" editable-textarea="vm.record.metadata.abstracts[0].value"
+            <p class="record-abstract" ng-bind="vm.record.metadata.abstracts[0].value" editable-textarea="vm.record.metadata.abstracts[0].value"
               e-ng-change="Utils.registerUpdateEvent()">
             </p>
 
