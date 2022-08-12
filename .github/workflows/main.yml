@@ -14,23 +14,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version: '10.14.0'
-          registry-url: 'https://registry.npmjs.org'
+     
+      - name: Vesion check
+        run: node --version
 
       - name: Install
-        run: npm install
+        run: yarn install
 
       - name: Test
         run: npm test
 
       - name: Build
         if: ${{ success() && github.event_name == 'release' }}
-        run: npm build
+        run: yarn build
 
       - name: Publish
         if: ${{ success() && github.event_name == 'release' }}
-        run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
