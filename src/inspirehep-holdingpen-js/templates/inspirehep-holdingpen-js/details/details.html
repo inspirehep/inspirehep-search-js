@@ -252,27 +252,27 @@
       <div class="clearfix"></div>
 
       <div class="col-md-12" ng-if="vm.record._workflow.data_type == 'authors'">
-        <holding-pen-template-handler template="/oldui/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/details/details_positions.html">
+        <holding-pen-template-handler template="/oldui/node_modules/inspire-next-search-js/dist/templates/inspirehep-holdingpen-js/details/details_positions.html">
         </holding-pen-template-handler>
       </div>
 
       <div class="col-md-12" ng-if="vm.record._workflow.data_type == 'authors'">
-        <holding-pen-template-handler template="/oldui/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/details/details_experiments.html">
+        <holding-pen-template-handler template="/oldui/node_modules/inspire-next-search-js/dist/templates/inspirehep-holdingpen-js/details/details_experiments.html">
         </holding-pen-template-handler>
       </div>
 
       <div class="col-md-12">
-        <holding-pen-template-handler template="/oldui/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/details/details_links.html">
+        <holding-pen-template-handler template="/oldui/node_modules/inspire-next-search-js/dist/templates/inspirehep-holdingpen-js/details/details_links.html">
         </holding-pen-template-handler>
       </div>
 
       <div class="col-md-6 col-sm-6" ng-if="vm.record._workflow.data_type == 'hep' && !Utils.hasCrawlErrors()">
-        <holding-pen-template-handler template="/oldui/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/details/details_subject_areas.html">
+        <holding-pen-template-handler template="/oldui/node_modules/inspire-next-search-js/dist/templates/inspirehep-holdingpen-js/details/details_subject_areas.html">
         </holding-pen-template-handler>
       </div>
 
       <div class="col-md-6 col-sm-6" ng-if="vm.record._workflow.data_type == 'authors'">
-        <holding-pen-template-handler template="/oldui/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/details/details_subject_areas.html">
+        <holding-pen-template-handler template="/oldui/node_modules/inspire-next-search-js/dist/templates/inspirehep-holdingpen-js/details/details_subject_areas.html">
         </holding-pen-template-handler>
       </div>
 
@@ -293,14 +293,14 @@
 
 
       <div class="col-md-6 col-sm-6" ng-if="vm.record._workflow.data_type == 'hep' && !Utils.hasCrawlErrors()">
-        <holding-pen-template-handler template="/oldui/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/details/details_keywords.html">
+        <holding-pen-template-handler template="/oldui/node_modules/inspire-next-search-js/dist/templates/inspirehep-holdingpen-js/details/details_keywords.html">
         </holding-pen-template-handler>
       </div>
 
       <div class="clearfix"></div>
 
       <div class="col-md-12" ng-if="vm.record._workflow.data_type == 'hep'">
-        <holding-pen-template-handler template="/oldui/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/details/details_references.html">
+        <holding-pen-template-handler template="/oldui/node_modules/inspire-next-search-js/dist/templates/inspirehep-holdingpen-js/details/details_references.html">
         </holding-pen-template-handler>
       </div>
 
@@ -308,7 +308,7 @@
 
 
       <div class="col-md-12" id="errors" ng-if="vm.record._workflow.status === 'ERROR'">
-        <holding-pen-template-handler template="/oldui/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/details/details_errors.html">
+        <holding-pen-template-handler template="/oldui/node_modules/inspire-next-search-js/dist/templates/inspirehep-holdingpen-js/details/details_errors.html">
         </holding-pen-template-handler>
       </div>
     </div>
@@ -430,12 +430,12 @@
 
           <div class="decision">
             <div ng-if="vm.record._workflow.data_type === 'hep'">
-              <holding-pen-template-handler template="/oldui/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/details/details_decision_hep.html">
+              <holding-pen-template-handler template="/oldui/node_modules/inspire-next-search-js/dist/templates/inspirehep-holdingpen-js/details/details_decision_hep.html">
               </holding-pen-template-handler>
             </div>
 
             <div ng-if="vm.record._workflow.data_type === 'authors'">
-              <holding-pen-template-handler template="/oldui/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/details/details_decision_authors.html">
+              <holding-pen-template-handler template="/oldui/node_modules/inspire-next-search-js/dist/templates/inspirehep-holdingpen-js/details/details_decision_authors.html">
               </holding-pen-template-handler>
             </div>
           </div>

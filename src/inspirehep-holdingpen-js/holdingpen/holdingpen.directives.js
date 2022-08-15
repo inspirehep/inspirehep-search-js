@@ -45,7 +45,7 @@
             $scope.operation = operation;
 
             $scope.modal = $uibModal.open({
-              templateUrl: '/oldui/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/modals/batch_' +
+              templateUrl: '/oldui/node_modules/inspire-next-search-js/dist/templates/inspirehep-holdingpen-js/modals/batch_' +
                 operation + '_modal.html'
             });
           },
@@ -245,14 +245,14 @@
 
           setRejectionReason: function () {
             $scope.modal = $uibModal.open({
-              templateUrl: '/oldui/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/modals/rejection_reason_modal.html',
+              templateUrl: '/oldui/node_modules/inspire-next-search-js/dist/templates/inspirehep-holdingpen-js/modals/rejection_reason_modal.html',
               scope: $scope
             });
           },
 
           showRejectionReason: function () {
             $scope.modal = $uibModal.open({
-              templateUrl: '/oldui/node_modules/inspirehep-search-js/dist/templates/inspirehep-holdingpen-js/modals/generic_info_modal.html',
+              templateUrl: '/oldui/node_modules/inspire-next-search-js/dist/templates/inspirehep-holdingpen-js/modals/generic_info_modal.html',
               scope: angular.extend($scope,
                 {
                   modalTitle: 'Reason for rejection',

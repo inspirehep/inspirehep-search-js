@@ -11,7 +11,7 @@
         <div class="record-brief-subtitle">
           <span ng-bind-html='record.metadata.collaborations | collaboration : record.metadata.corporate_author'></span>
             <span ng-bind-html='record.metadata.authors | corporateAuthor : record.metadata.corporate_author'></span>
-            <authors-affiliation authors-template="/oldui/node_modules/inspirehep-search-js/dist/templates/authors/authors.html" authors="{{record.metadata.authors}}" collaboration="{{record.metadata.collaboration}}" number-of-authors={{record.display.number_of_authors}} control-number="{{record.metadata.control_number}}"></authors-affiliation>
+            <authors-affiliation authors-template="/oldui/node_modules/inspire-next-search-js/dist/templates/authors/authors.html" authors="{{record.metadata.authors}}" collaboration="{{record.metadata.collaboration}}" number-of-authors={{record.display.number_of_authors}} control-number="{{record.metadata.control_number}}"></authors-affiliation>
             <span class="record-brief-muted" ng-bind-html="record.display.date | date : record.metadata.authors : record.metadata.collaborations : record.metadata.corporate_author"></span>
         </div>
         <div class="record-brief-details">
@@ -42,7 +42,7 @@
       </div>
       <div class="col-md-3 right-column">
         <a ng-if="record.metadata.arxiv_eprints|arxiv" type="button" class="btn custom-btn btn-warning link-to-pdf no-external-icon" href="http://arxiv.org/pdf/{{ record.metadata.arxiv_eprints | arxiv }}" >PDF</a>
-        <inspire-export-modal button-template="/oldui/node_modules/inspirehep-search-js/dist/templates/export/templates/button_single.html" body-template="/oldui/node_modules/inspirehep-search-js/dist/templates/export/templates/modalbody.html" recid={{record.id}}>
+        <inspire-export-modal button-template="/oldui/node_modules/inspire-next-search-js/dist/templates/export/templates/button_single.html" body-template="/oldui/node_modules/inspire-next-search-js/dist/templates/export/templates/modalbody.html" recid={{record.id}}>
         </inspire-export-modal>
         <div class="citations-references">
           <span ng-if="record.metadata.citation_count">
