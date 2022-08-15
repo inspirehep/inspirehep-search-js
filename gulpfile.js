@@ -105,7 +105,7 @@ gulp.task('build.templates', function(done) {
     .pipe(templateCache('templates.js', {
       moduleSystem: 'IIFE',
       standalone: true,
-      root: '/oldui/node_modules/inspirehep-search-js/dist/templates/',
+      root: '/oldui/node_modules/inspire-next-search-js/dist/templates/',
       module: 'inspirehepSearchTemplates'
     }))
     .pipe(gulp.dest('./dist/templates'))
