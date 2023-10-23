@@ -486,11 +486,11 @@
       <!--RT Panel-->
       <div class="col-md-12" ng-if="!Utils.hasCrawlErrors()">
         <div class="detail-panel" id="hp-panel-rt-info">
-          <h4>RT information</h4>
+          <h4>SNow information</h4>
 
           <div class="text-center" ng-if="vm.record._extra_data.ticket_id">
             <p>
-              <a href="https://rt.inspirehep.net/Ticket/Display.html?id={{vm.record._extra_data.ticket_id}}" target="_new">See related ticket (#{{vm.record._extra_data.ticket_id}})</a>
+              <a href="https://cerntraining.service-now.com/nav_to.do?uri=u_request_fulfillment.do&sys_id={{vm.record._extra_data.ticket_id}}" target="_new">See related ticket (#{{vm.record._extra_data.ticket_id}})</a>
             </p>
           </div>
         </div>
