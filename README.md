@@ -11,13 +11,30 @@ Installation
 ------------
 
     $ npm i
-    
+
 Release
 -------
 
+This is a work around, CI doesn't work for the moment.
+
 1. Update `package.json` with the version number
-2. Release (from the github UI) a new version with the same number
-3. :tada:
+
+2. Run:
+
+```bash
+yarn version
+git push origin master
+git push origin --tags
+```
+
+3. Release:
+
+```bash
+# login to npm with cern-sis-ts account
+npm publish
+```
+
+4. :tada:
 
 
 Demo
@@ -40,8 +57,8 @@ Docs
     $ npm run-script docs
     $ # read
     $ open docs/index.html
-    
-   
+
+
 
 
 How to use?
@@ -107,7 +124,7 @@ For easy development of **inspirehep-search-js** on top of **[inspire-next](http
 8) To install all dependencies and **Gulp.js**, in the **inspirehep-search-js** folder run:
 
 
-    laptop> $ npm install 
+    laptop> $ npm install
     laptop> $ nmp install gulp
 
 9) As you run **inspire-next**, start watching changes in the **inspirehep-search-js** folder. Every time a **JS** or **HTML** file is modified, tests will run and the `dist/` folder will be recreated.
